@@ -138,7 +138,7 @@ export default {
             // "Transfer-Encoding": 'chunked'
           },
           data: {
-            apikey: process.env.OPENAI_API_KEY,
+            // apikey: process.env.OPENAI_API_KEY,
             model: "gpt-3.5-turbo",
             messages: messages,
           },
