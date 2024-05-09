@@ -1,0 +1,94 @@
+/* pages/chatPage/chat.sass */
+
+page // 全局页面样式
+  background-color: #ededed // 灰色背景
+
+.container // 对话页面（不包括底部Tab栏）
+  display: flex
+  flex-direction: column
+  height: 100vh
+  padding-bottom: 400rpx
+
+  .fixed-bottom // 用于固定在底部的输入框
+    position: fixed
+    bottom: 170rpx
+    height: 120rpx
+    width: 100%
+    background-color: #fff
+
+  .fixed-top // 顶部的输入框
+    top: 0
+    height: 120rpx
+    width: 100%
+    background-color: #fff
+
+  .wechat-content // 拟微信对话内容
+    padding: 22rpx
+    padding-bottom: 400rpx
+
+    .wechat-dialog
+      margin-bottom: 31.25rpx
+      position: relative
+      display: flex
+
+      .wechat-dialog-face // 头像
+        width: 76.875rpx
+        height: 76.875rpx
+        background: #f1f1f1
+        border-radius: 9.375rpx
+        background-size: contain
+        background-repeat: no-repeat
+        position: absolute
+        background-position: center
+        overflow: hidden
+        display: flex
+        align-items: center
+        justify-content: center
+
+        image // 头像图片
+          display: block
+          width: 76.875rpx
+          height: 76.875rpx
+
+      .wechat-dialog-text // 对话框
+        background: #fff
+        padding: 17.5rpx 23.75rpx
+        font-size: 30rpx
+        border-radius: 9.375rpx
+        margin-right: 87.5rpx
+        word-break: break-all
+        margin-left: 100rpx
+        display: inline-block
+        position: relative
+        line-height: normal
+        min-height: 40rpx
+
+        &:after
+          content: ""
+          background: #fff
+          width: 15rpx
+          height: 15rpx
+          border-bottom-left-radius: 2.5rpx
+          top: 31.25rpx
+          left: -7.5rpx
+          position: absolute
+          transform: rotate(45deg)
+
+    .wechat-dialog-right // 如果对话框在右侧（自己）
+      justify-content: flex-end
+
+      .wechat-dialog-face // 自己头像
+        background-color: #f7cc4f // 黄色背景
+        right: 0
+
+      .wechat-dialog-text // 自己对话框
+        background: #98e970
+        margin-left: 87.5rpx
+        margin-right: 100rpx
+
+        &:after
+          background: #98e970
+          left: auto
+          right: -6.25rpx
+          border-top-right-radius: 2.5rpx
+          border-bottom-left-radius: 0
