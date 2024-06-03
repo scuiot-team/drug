@@ -1,2 +1,9 @@
 // 在 `app.scss` 样式中引入全部或部分组件样式
 @import "taro-ui-vue3/dist/style/index.scss";
+
+// 这里是全局样式
+.headline {
+  padding: 30rpx;
+  font-size: 50rpx;
+  color: #333;
+}

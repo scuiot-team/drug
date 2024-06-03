@@ -1,34 +1,51 @@
 <template>
-  This is home page
-  <view>
-    <AtButton type="secondary" @click="(e) => handleClick('secondary')">
-      事件传参
-    </AtButton>
-    <AtButton loading type="primary" @click="handleClick.bind(this, 'primary')">
-      事件传参
-    </AtButton>
-
-    <AtList>
-      <AtListItem title="标题文字" @click="handleClick" />
-      <AtListItem title="标题文字" arrow="right" />
-      <AtListItem title="标题文字" extraText="详细信息" />
-      <AtListItem title="禁用状态" disabled extraText="详细信息" />
-    </AtList>
-    <AtList>
-      <AtListItem
-        title="标题文字"
-        note="描述信息"
-        arrow="right"
-        :iconInfo="{ size: 25, color: '#78A4FA', value: 'calendar' }"
-      />
-      <AtListItem
-        title="标题文字"
-        note="描述信息"
-        extraText="详细信息"
-        arrow="right"
-        :iconInfo="{ size: 25, color: '#FF4949', value: 'bookmark' }"
-      />
-    </AtList>
+  <view class="headline">主页</view>
+  <view class="health-info-cards">
+    <view class="card-container">
+      <AtCard
+        note="1天前"
+        extra="2024/12/12"
+        title="血压"
+        :thumb="bloodPressureUrl"
+      >
+        这也是内容区 可以随意定义功能, 我想要加一些图表什么的
+      </AtCard>
+    </view>
+    <view class="card-container">
+      <AtCard note="1天前" extra="2024/12/12" title="体重" :thumb="weightUrl">
+        这也是内容区 可以随意定义功能, 我想要加一些图表什么的
+      </AtCard>
+    </view>
+    <view class="card-container">
+      <AtCard
+        note="1天前"
+        extra="2024/12/12"
+        title="心率"
+        :thumb="heartrateUrl"
+      >
+        这也是内容区 可以随意定义功能, 我想要加一些图表什么的
+      </AtCard>
+    </view>
+    <view class="card-container">
+      <AtCard
+        note="1天前"
+        extra="2024/12/12"
+        title="血氧饱和度"
+        :thumb="paO2Url"
+      >
+        这也是内容区 可以随意定义功能, 我想要加一些图表什么的
+      </AtCard>
+    </view>
+    <view class="card-container">
+      <AtCard
+        note="1天前"
+        extra="2024/12/12"
+        title="血糖"
+        :thumb="bloodGlucoseUrl"
+      >
+        这也是内容区 可以随意定义功能, 我想要加一些图表什么的
+      </AtCard>
+    </view>
   </view>
   <view>
     <AtTabBar
@@ -42,18 +59,32 @@
 
 
 <script>
+import "./home.sass"; // 引入样式
 import Taro from "@tarojs/taro";
 // 引用全局变量 https://nervjs.github.io/taro-docs/docs/best-practice#全局变量
 import {
   set as setGlobalData,
   get as getGlobalData,
 } from "../../utils/global_data";
+// Taro 中引用静态资源必须先 import 进来
+// https://blog.csdn.net/laishaojiang/article/details/109111562
+// https://docs.taro.zone/docs/static-reference/
+import bloodPressureUrl from "../../images/icons/bloodPressure.svg";
+import bloodGlucoseUrl from "../../images/icons/bloodGlucose.svg";
+import weightUrl from "../../images/icons/weight.svg";
+import heartrateUrl from "../../images/icons/heartrate.svg";
+import paO2Url from "../../images/icons/paO2.svg";
 
 export default {
   name: "homePage",
   data() {
     return {
       tabList: getGlobalData("tabList"),
+      bloodPressureUrl: bloodPressureUrl,
+      bloodGlucoseUrl: bloodGlucoseUrl,
+      weightUrl: weightUrl,
+      heartrateUrl: heartrateUrl,
+      paO2Url: paO2Url,
     };
   },
   methods: {

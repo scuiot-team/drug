@@ -1,21 +1,29 @@
 <template>
   <view> This is self page </view>
   <view>
-    <AtTabBar fixed :tabList="tabList" @click="handleClickTabList" :current="3" />
+    <AtTabBar
+      fixed
+      :tabList="tabList"
+      @click="handleClickTabList"
+      :current="3"
+    />
   </view>
 </template>
 
 
 <script>
-import Taro from '@tarojs/taro'
+import Taro from "@tarojs/taro";
 // 引用全局变量 https://nervjs.github.io/taro-docs/docs/best-practice#全局变量
-import { set as setGlobalData, get as getGlobalData } from "../../utils/global_data";
+import {
+  set as setGlobalData,
+  get as getGlobalData,
+} from "../../utils/global_data";
 
 export default {
   name: "selfPage",
   data() {
     return {
-      tabList: getGlobalData('tabList')
+      tabList: getGlobalData("tabList"),
     };
   },
   methods: {
