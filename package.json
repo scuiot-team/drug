@@ -55,6 +55,10 @@
     "@tarojs/shared": "3.6.28",
     "@tarojs/taro": "3.6.28",
     "@types/sass": "1.43.1",
+<<<<<<< HEAD
+=======
+    "taro-ui": "^3.3.0",
+>>>>>>> master
     "taro-ui-vue3": "^1.0.0-alpha.21",
     "text-encoding-shim": "^1.0.5",
     "vue": "^3.0.0",

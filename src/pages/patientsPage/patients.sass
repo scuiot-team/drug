@@ -1,0 +1,60 @@
+page
+  display: flex
+  flex-direction: column
+  align-items: center
+
+.scrollview
+  width: 100%
+  height: calc( 100vh - 120rpx )
+  
+  .scrollbody
+    width: 100%
+    padding-bottom: 20rpx
+    display: flex
+    flex-direction: column
+    align-items: center
+
+    .card
+      width: 80%
+      border-radius: 20rpx
+      margin-top: 20rpx
+      padding: 20rpx
+      display: flex
+      flex-direction: row
+      background: linear-gradient(to bottom,#FDF5E6,white)
+      box-shadow: 5rpx 5rpx 15rpx lightgray	
+      
+      .avatar
+        width: 250rpx
+        height: 300rpx
+        border-radius: 20rpx
+        box-shadow: 0 0 10rpx lightgray
+
+      .info
+        width: 340rpx
+        height: 280rpx
+        display: flex
+        flex-direction: column
+        margin-left: 25rpx
+        position: relative
+
+        .name
+          font-weight: bold
+          margin: 20rpx 0
+          
+        .icon-text
+          display: flex
+          margin-top: 15rpx
+          
+        .icon
+          width: 45rpx
+          height: 45rpx
+          position: absolute
+          bottom: 0
+
+.add
+  width: 85%
+  position: absolute
+  bottom: 20rpx
+  border-radius: 50rpx
+  background-color: #FFDAB9	
