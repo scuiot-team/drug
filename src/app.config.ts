@@ -5,6 +5,18 @@ export default defineAppConfig({
         'pages/selfPage/self',
         'pages/dataPage/data',
         'pages/chatPage/chat',
+<<<<<<< HEAD
+=======
+        'pages/patientsPage/patients',
+        'pages/sosPage/sos',
+        'pages/aboutPage/about',
+        'pages/settingPage/setting',
+        'pages/selfInfoPage/selfInfo',
+        'pages/articlePage/article',
+        'pages/patientInfoPage/patientInfo',
+        'pages/editPatientInfoPage/editPatientInfo',
+        'pages/loginPage/login'
+>>>>>>> master
     ],
     window: {
         backgroundTextStyle: 'light',
