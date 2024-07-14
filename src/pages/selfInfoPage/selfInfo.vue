@@ -47,7 +47,7 @@ export default {
 </script>
 
 <script setup>
-import { ref, reactive } from "vue";
+import { ref } from "vue";
 import "./selfInfo.sass";
 import Taro from "@tarojs/taro";
 import {

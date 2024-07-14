@@ -4,6 +4,10 @@ export default {
     quiet: false,
     stats: true
   },
-  mini: {},
+  mini: {
+    optimizeMainPackage: {
+      enable: true
+    }
+  },
   h5: {}
 } satisfies UserConfigExport

@@ -7,3 +7,5 @@ node_modules/
 .swc
 .DS_Store/
 .env.local
+package-lock.json
+.gitignore

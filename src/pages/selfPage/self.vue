@@ -26,14 +26,6 @@
       @click="navigateTo(item.url)"
     />
   </AtList>
-  <view>
-    <AtTabBar
-      fixed
-      :tabList="tabList"
-      @click="handleClickTabList"
-      :current="3"
-    />
-  </view>
   <!-- <image src='../../images/用户信息管理.png'></image>
   <image src='../../images/关于.png'></image> -->
   <AtButton
@@ -43,6 +35,7 @@
   >
     登录
   </AtButton>
+  <AtTabBar fixed :tabList="tabList" @click="switchTab" :current="3" />
 </template>
 
 <script>
@@ -60,13 +53,15 @@ import {
   get as getGlobalData,
 } from "../../utils/global_data";
 import { ref } from "vue"; // ref声明响应式数据
-//
+import { switchTab } from "../../utils/global_func";
+// Taro 引用图片
 import infoIconUrl from "../../images/用户信息管理.png";
 import phoneIconUrl from "../../images/拨号.png";
 import aboutIconUrl from "../../images/关于.png";
 
 let userInfo = ref(getGlobalData("userInfo"));
-let tabList = getGlobalData("tabList");
+const tabList = getGlobalData("tabList");
+
 let settingList = [
   {
     title: "监护对象管理",
@@ -88,12 +83,7 @@ let settingList = [
 useDidShow((e) => {
   userInfo.value = getGlobalData("userInfo");
 });
-function handleClickTabList(value) {
-  // 跳转到目的页面，在当前页面打开
-  Taro.switchTab({
-    url: this.tabList[value].url,
-  });
-}
+
 function navigateTo(url, e) {
   Taro.navigateTo({ url: url });
 }

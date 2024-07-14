@@ -18,8 +18,9 @@ export default defineConfig(async (merge, { command, mode }) => {
     sourceRoot: 'src',
     outputRoot: 'dist',
     plugins: [
-        // TMD 装了半天都装不上 依赖 Python2
-        // '@tarojs/plugin-sass',
+      // TMD 装了半天都装不上 依赖 Python2
+      // '@tarojs/plugin-sass',
+      // '@tarojs/plugin-terser'
     ],
     defineConstants: {
     },

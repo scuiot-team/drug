@@ -50,6 +50,7 @@ export default {
   name: "patientInfoPage",
 };
 </script>
+
 <script setup>
 import "./patientInfo.sass";
 import Taro from "@tarojs/taro";

@@ -3,7 +3,45 @@
 
 // 这里是全局样式
 .headline {
-  padding: 30rpx;
-  font-size: 50rpx;
+  padding-left: 30px;
+  padding-bottom: 20px;
+  font-size: 35px;
+  font-weight: bold;
   color: #333;
+  position: relative;
+  margin-bottom: 40px;
+
+  &::after {
+    content: ""; // 这是一个伪元素，因此需要设置content
+    position: absolute; // 使得此元素可以相对于其父元素定位
+    left: 30px; // 从左边开始
+    bottom: 0; // 定位在标题的下方
+    height: 5px; // 线的高度
+    width: 100px; // 线的宽度
+    background-color: #6190e8; // 线的颜色
+  }
+}
+
+.panel-title {
+  position: relative;
+  margin-bottom: 16px;
+  margin-top: 16px;
+  padding-left: 40px;
+  color: #6a6a77;
+  font-size: 30px;
+  font-weight: bold;
+
+  &::before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    margin-top: -20px;
+    width: 4px;
+    height: 40px;
+    background-color: #6190e8;
+    box-shadow: 0 3px 4px 0 rgba(97, 144, 232, .2);
+    border-radius: 1px;
+  }
 }
