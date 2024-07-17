@@ -11,11 +11,19 @@
       />
       <AtInput
         name="value"
-        title="数值"
+        title="收缩压"
         type="number"
-        :placeholder="'请输入' + paraTitle + '值'"
-        :value="paraValue"
-        :onChange="valueInput"
+        :placeholder="'请输入收缩压值(大的那个)'"
+        :value="para1Value"
+        :onChange="value1Input"
+      />
+      <AtInput
+        name="value"
+        title="舒张压"
+        type="number"
+        :placeholder="'请输入舒张压值(小的那个)'"
+        :value="para2Value"
+        :onChange="value2Input"
       />
     </AtForm>
     <AtButton
@@ -31,13 +39,13 @@
 
 <script>
 export default {
-  name: "addRecordPage",
+  name: "addRecord2Page",
 };
 </script>
 
 <script setup>
 import Taro from "@tarojs/taro";
-import "./addRecord.sass";
+import "./addRecord2.sass";
 import { onMounted, ref } from "vue";
 import {
   set as setGlobalData,
@@ -53,7 +61,9 @@ const paraTitle = params["title"];
 const paraName = params["name"];
 // 获取当前时间
 var currTime = ref(`${getCurrDate()} ${getCurrTime()}`);
-var paraValue = ref();
+// 2个参数（舒张压、收缩压）
+var para1Value = ref();
+var para2Value = ref();
 
 function timeInput(e) {
   // 绑定时间输入框
@@ -61,22 +71,28 @@ function timeInput(e) {
   currTime.value = e;
 }
 
-function valueInput(e) {
+function value1Input(e) {
   // 绑定数值输入框
   console.log(e);
-  paraValue.value = e;
+  para1Value.value = e;
+}
+
+function value2Input(e) {
+  // 绑定数值输入框
+  console.log(e);
+  para2Value.value = e;
 }
 
 function saveRecord(params) {
   console.log("saveRecord");
   console.log("get time:", currTime.value);
-  console.log("get value:", paraValue.value);
   let healthIndicators = ref(getGlobalData("healthIndicators"));
   let currTimeSplit = currTime.value.split(" ");
   healthIndicators.value[paraName].push({
     date: currTimeSplit[0], // TODO: 用户填写不规范可能会出bug
     time: currTimeSplit[1],
-    value: paraValue.value,
+    high: para1Value.value,
+    low: para2Value.value,
   });
   Taro.showToast({
     title: "保存成功",

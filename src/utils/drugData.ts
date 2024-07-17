@@ -1,5 +1,6 @@
 export default class DrugData {
   constructor(
+    public id: String,        // 唯一标识   // 先用TimeStamp代替
     public drugName: String,  // 药品名称
     public dosage: String,    // 给药剂量
     public form: String,      // 药物剂型

@@ -1,5 +1,5 @@
 <template>
-  <view class="user">
+  <View class="user">
     <AtAvatar
       :image="userInfo.avatar"
       circle
@@ -15,7 +15,7 @@
       color="gray"
       @click="navigateTo('/pages/settingPage/setting')"
     ></AtIcon>
-  </view>
+  </View>
   <AtList class="menu" :hasBorder="false">
     <AtListItem
       v-for="(item, index) in settingList"

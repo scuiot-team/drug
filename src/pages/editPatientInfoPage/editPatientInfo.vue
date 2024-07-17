@@ -76,7 +76,7 @@
         <AtListItem title="是否独居" :extraText="patientInfo.liveAlone" />
       </AtList>
     </Picker>
-    <view class="textarea">
+    <View class="textarea">
       <text class="title">饮食习惯</text>
       <AtTextarea
         class="content"
@@ -86,7 +86,7 @@
         placeholder="患者的饮食喜好、禁忌等..."
       />
     </view>
-    <view class="textarea">
+    <View class="textarea">
       <text class="title">身体状况</text>
       <AtTextarea
         class="content"

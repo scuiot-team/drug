@@ -1,6 +1,6 @@
 <template>
   <View>
-    <View class="headline"> 添加药物 </View>
+    <View class="headline"> 编辑药物 </View>
     <View class="panel">
       <View class="panel-title">药物信息</View>
       <AtList>
@@ -69,21 +69,21 @@
         </Picker>
       </AtList>
     </View>
-    <AtButton class="save-btn" type="primary" size="normal" :onClick="addDrug">
-      添加
+    <AtButton class="save-btn" type="primary" size="normal" :onClick="editDrug">
+      完成
     </AtButton>
   </View>
 </template>
 
 <script>
 export default {
-  name: "addDrugPage",
+  name: "editDrugPage",
 };
 </script>
 
 <script setup>
 import Taro from "@tarojs/taro";
-import "./addDrug.sass";
+import "./editDrug.sass";
 // 要使 state 对象在组件中可用，需要使用 reactive 函数将其包装
 import { reactive, ref } from "vue";
 import {
@@ -92,10 +92,6 @@ import {
 } from "../../utils/global_data";
 import { getCurrDate, getCurrTime } from "../../utils/global_func";
 import DrugData from "../../utils/drugData";
-
-// 获取页面传入的参数
-const params = Taro.getCurrentInstance().router.params;
-console.log(params);
 
 // 获取药物列表
 var drugs = ref(getGlobalData("drugs"));
@@ -113,6 +109,23 @@ var state = reactive({
   startDateSelected: getCurrDate(),
   stopDateSelected: getCurrDate(),
 });
+
+// 获取页面传入的参数
+let params = Taro.getCurrentInstance().router.params;
+let index = params.index;
+
+if (index !== undefined) {
+  let thisDrug = drugs.value[index];
+
+  state.dosage = thisDrug.dosage;
+  state.drugName = thisDrug.drugName;
+  state.doseChecked = thisDrug.dose;
+  state.formChecked = thisDrug.form;
+  state.intervalSelected = thisDrug.interval;
+  state.timeSelected = thisDrug.time;
+  state.startDateSelected = thisDrug.startDate;
+  state.stopDateSelected = thisDrug.stopDate;
+}
 
 function onDoseChange(e) {
   state.doseChecked = state.dose[e.detail.value];
@@ -169,8 +182,8 @@ function onDosageChange(e) {
   // console.log(state.dosage);
 }
 
-function addDrug(params) {
-  let drug = new DrugData(
+function editDrug() {
+  let newDrug = new DrugData(
     Date.now(), // 唯一标识
     state.drugName, // 药品名称
     state.dosage, // 给药剂量
@@ -181,7 +194,8 @@ function addDrug(params) {
     state.startDateSelected, // 开始日期
     state.stopDateSelected // 结束日期
   );
-  drugs.value.push(drug);
+  drugs.value[index] = newDrug;
   console.log(drugs.value);
+  Taro.navigateBack();
 }
 </script>

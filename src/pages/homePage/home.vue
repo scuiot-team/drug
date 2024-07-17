@@ -1,9 +1,9 @@
 <template>
-  <view>
-    <view v-if="drugs.length">
+  <View>
+    <View v-if="drugs.length">
       <!-- if drugs isn't empty -->
-      <view class="headline">距离下次服药时间</view>
-      <view class="countdown-container">
+      <View class="headline">距离下次服药时间</View>
+      <View class="countdown-container">
         <AtCountdown
           isCard
           :day="state.clock.day"
@@ -11,8 +11,8 @@
           :minutes="state.clock.minutes"
           :seconds="state.clock.seconds"
         />
-      </view>
-      <view class="alarm-container">
+      </View>
+      <View class="alarm-container">
         <AtTag class="tags drug-name" type="primary" circle>
           {{ state.nextDrug.drugName }}
         </AtTag>
@@ -22,16 +22,28 @@
         <AtTag class="tags dosage" type="primary" circle>
           {{ state.nextDrug.dosage }} {{ state.nextDrug.form }}
         </AtTag>
-      </view>
-    </view>
-    <view class="add-drug-btn-container">
-      <AtFab class="add-drug-btn" @click="navigateTo('../addDrugPage/addDrug')">
-        <Text className="at-fab__icon at-icon at-icon-add"></Text>
+      </View>
+    </View>
+    <View class="float-btn-container">
+      <View v-if="state.showSecondaryFabs">
+        <AtFab
+          class="secondary-btn"
+          @click="navigateTo('../manageDrugPage/manageDrug')"
+          ><Text className="at-fab__icon at-icon at-icon-list"></Text>
+        </AtFab>
+        <AtFab
+          class="secondary-btn"
+          @click="navigateTo('../addDrugPage/addDrug')"
+          ><Text className="at-fab__icon at-icon at-icon-add"></Text>
+        </AtFab>
+      </View>
+      <AtFab class="drug-btn" @click="toggleFloatBtn">
+        <image class="svg-icon" src="../../images/icons/drug.svg"></image>
       </AtFab>
-    </view>
-    <view class="headline">健康指标</view>
-    <view class="health-info-cards">
-      <view class="card-container">
+    </View>
+    <View class="headline">健康指标</View>
+    <View class="health-info-cards">
+      <View class="card-container">
         <AtCard
           note="1天前"
           title="血压"
@@ -39,30 +51,58 @@
           :extra="
             healthIndicators.bloodPressureData[
               healthIndicators.bloodPressureData.length - 1
-            ].time
+            ].date
           "
           @click="
             navigateTo('../para2Page/para2?name=bloodPressureData&title=血压')
           "
         >
-          这也是内容区 可以随意定义功能, 我想要加一些图表什么的
+          <View v-if="healthIndicators.bloodPressureData.length === 0">
+            <View class="no-data-text">无数据</View>
+          </View>
+          <View v-else>
+            <View class="data-text">
+              {{
+                healthIndicators.bloodPressureData[
+                  healthIndicators.bloodPressureData.length - 1
+                ].low
+              }}/{{
+                healthIndicators.bloodPressureData[
+                  healthIndicators.bloodPressureData.length - 1
+                ].high
+              }}
+            </View>
+            <View class="unit-text">毫米汞柱</View>
+          </View>
         </AtCard>
-      </view>
-      <view class="card-container">
+      </View>
+      <View class="card-container">
         <AtCard
           note="1天前"
           title="体重"
           :thumb="weightUrl"
           :extra="
             healthIndicators.weightData[healthIndicators.weightData.length - 1]
-              .time
+              .date
           "
           @click="navigateTo('../paraPage/para?name=weightData&title=体重')"
         >
-          这也是内容区 可以随意定义功能, 我想要加一些图表什么的
+          <View v-if="healthIndicators.weightData.length === 0">
+            <View class="no-data-text">无数据</View>
+          </View>
+          <View v-else>
+            <View class="data-text">
+              {{
+                healthIndicators.weightData[
+                  healthIndicators.weightData.length - 1
+                ].value
+              }}
+            </View>
+            <View class="unit-text">千克</View>
+          </View>
         </AtCard>
-      </view>
-      <view class="card-container">
+      </View>
+      <View class="card-container">
         <AtCard
           note="1天前"
           title="心率"
@@ -70,14 +110,26 @@
           :extra="
             healthIndicators.heartRateData[
               healthIndicators.heartRateData.length - 1
-            ].time
+            ].date
           "
           @click="navigateTo('../paraPage/para?name=heartRateData&title=心率')"
         >
-          这也是内容区 可以随意定义功能, 我想要加一些图表什么的
+          <View v-if="healthIndicators.heartRateData.length === 0">
+            <View class="no-data-text">无数据</View>
+          </View>
+          <View v-else>
+            <View class="data-text">
+              {{
+                healthIndicators.heartRateData[
+                  healthIndicators.heartRateData.length - 1
+                ].value
+              }}
+            </View>
+            <View class="unit-text">次/分钟</View>
+          </View>
         </AtCard>
-      </view>
-      <view class="card-container">
+      </View>
+      <View class="card-container">
         <AtCard
           note="1天前"
           title="血氧饱和度"
@@ -85,16 +137,28 @@
           :extra="
             healthIndicators.bloodOxygenData[
               healthIndicators.bloodOxygenData.length - 1
-            ].time
+            ].date
           "
           @click="
             navigateTo('../paraPage/para?name=bloodOxygenData&title=血氧饱和度')
           "
         >
-          这也是内容区 可以随意定义功能, 我想要加一些图表什么的
+          <View v-if="healthIndicators.bloodOxygenData.length === 0">
+            <View class="no-data-text">无数据</View>
+          </View>
+          <View v-else>
+            <View class="data-text">
+              {{
+                healthIndicators.bloodOxygenData[
+                  healthIndicators.bloodOxygenData.length - 1
+                ].value
+              }}
+            </View>
+            <View class="unit-text">%</View>
+          </View>
         </AtCard>
-      </view>
-      <view class="card-container">
+      </View>
+      <View class="card-container">
         <AtCard
           note="1天前"
           title="血糖"
@@ -102,18 +166,30 @@
           :extra="
             healthIndicators.bloodGlucoseData[
               healthIndicators.bloodGlucoseData.length - 1
-            ].time
+            ].date
           "
           @click="
             navigateTo('../paraPage/para?name=bloodGlucoseData&title=血糖')
           "
         >
-          这也是内容区 可以随意定义功能, 我想要加一些图表什么的
+          <View v-if="healthIndicators.bloodGlucoseData.length === 0">
+            <View class="no-data-text">无数据</View>
+          </View>
+          <View v-else>
+            <View class="data-text">
+              {{
+                healthIndicators.bloodGlucoseData[
+                  healthIndicators.bloodGlucoseData.length - 1
+                ].value
+              }}
+            </View>
+            <View class="unit-text">毫摩尔/升</View>
+          </View>
         </AtCard>
-      </view>
-    </view>
+      </View>
+    </View>
     <AtTabBar fixed :tabList="tabList" @click="switchTab" :current="0" />
-  </view>
+  </View>
 </template>
 
 <script>
@@ -147,6 +223,7 @@ let drugs = ref(getGlobalData("drugs"));
 // 获取下一次服药的药物
 let next = getNextDrug(drugs.value);
 let state = reactive({
+  showSecondaryFabs: false,
   nextDrug: drugs.value[next.index],
   clock: calcHouMinAndSecs(next.timeDiff),
 });
@@ -190,5 +267,10 @@ function onTimeUp(params) {
     icon: "success",
     duration: 2000,
   });
+}
+
+function toggleFloatBtn() {
+  state.showSecondaryFabs = !state.showSecondaryFabs;
+  console.log(state.showSecondaryFabs);
 }
 </script>

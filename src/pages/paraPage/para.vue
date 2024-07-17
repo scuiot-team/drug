@@ -1,10 +1,10 @@
 <template>
-  <view>
-    <view class="headline">{{ paraTitle }}</view>
+  <View>
+    <View class="headline">{{ paraTitle }}</view>
     <AtFab class="add-record-btn" :onClick="addRecord">
       <Text className="at-fab__icon at-icon at-icon-add"></Text>
     </AtFab>
-    <view class="bar-chart">
+    <View class="bar-chart">
       <EChart ref="canvas" canvas-id="bar-canvas" />
     </view>
   </view>
@@ -59,7 +59,7 @@ onMounted(() => {
     xAxis: {
       name: '时\n间',
       type: "category",
-      data: paraData.map((item) => item.time),
+      data: paraData.map((item) => item.date),
     },
     yAxis: {
       type: "value",

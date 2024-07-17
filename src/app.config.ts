@@ -17,7 +17,10 @@ export default defineAppConfig({
     'pages/paraPage/para',
     'pages/para2Page/para2',
     'pages/addRecordPage/addRecord',
+    'pages/addRecord2Page/addRecord2',
     'pages/addDrugPage/addDrug',
+    'pages/manageDrugPage/manageDrug',
+    'pages/editDrugPage/editDrug',
   ],
   window: {
     backgroundTextStyle: 'light',

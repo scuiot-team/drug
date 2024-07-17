@@ -1,6 +1,6 @@
 <template>
-  <view class="container">
-    <view class="fixed-top">
+  <View class="container">
+    <View class="fixed-top">
       <AtInput
         type="text"
         placeholder="您有什么问题?"
@@ -14,52 +14,52 @@
           @click="onSendMsg"
         ></AtIcon>
       </AtInput>
-    </view>
-    <view class="wechat-content">
-      <view v-for="(item, index) in state.messages" :key="index">
-        <view class="wechat-dialog" v-if="item.role === 'assistant'">
-          <view class="wechat-dialog-face">
+    </View>
+    <View class="wechat-content">
+      <View v-for="(item, index) in state.messages" :key="index">
+        <View class="wechat-dialog" v-if="item.role === 'assistant'">
+          <View class="wechat-dialog-face">
             <AtAvatar
               class="avatar"
-              image="https://cdn.fyscu.com/otherImages/gptAvatar.png"
+              image="https://cdn.fyscu.com/otherImages/AiAvatar.svg"
             ></AtAvatar>
-          </view>
-          <view class="wechat-dialog-text">
+          </View>
+          <View class="wechat-dialog-text">
             {{ item.content }}
-          </view>
-        </view>
-        <view
+          </View>
+        </View>
+        <View
           class="wechat-dialog wechat-dialog-right"
           v-else-if="item.role === 'user'"
         >
-          <view class="wechat-dialog-face">
+          <View class="wechat-dialog-face">
             <AtAvatar class="avatar" :image="userAvatarUrl"></AtAvatar>
-          </view>
-          <view class="wechat-dialog-text">
+          </View>
+          <View class="wechat-dialog-text">
             {{ item.content }}
-          </view>
-        </view>
-      </view>
-      <view v-if="state.isLoading">
-        <view class="wechat-dialog">
-          <view class="wechat-dialog-face">
+          </View>
+        </View>
+      </View>
+      <View v-if="state.isLoading">
+        <View class="wechat-dialog">
+          <View class="wechat-dialog-face">
             <AtAvatar
               class="avatar"
-              image="https://cdn.fyscu.com/otherImages/gptAvatar.png"
+              image="https://cdn.fyscu.com/otherImages/AiAvatar.svg"
             ></AtAvatar>
-          </view>
-          <view class="wechat-dialog-text">
-            <view v-if="state.isResponding">
+          </View>
+          <View class="wechat-dialog-text">
+            <View v-if="state.isResponding">
               {{ state.respondingText }}
-            </view>
-            <view v-else>
+            </View>
+            <View v-else>
               <AtIcon value="loading-2"></AtIcon>
-            </view>
-          </view>
-        </view>
-      </view>
-    </view>
-  </view>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
   <!-- 底栏 Tabbar -->
   <AtTabBar fixed :tabList="tabList" @click="switchTab" :current="2" />
 </template>
@@ -73,8 +73,8 @@ export default {
 <script setup>
 import "./chat.sass";
 import Taro from "@tarojs/taro";
-// import gptAvatar from "../../images/gptAvatar.png";
-// Instead: https://cdn.fyscu.com/otherImages/gptAvatar.png
+// import AiAvatar from "../../images/icons/AiAvatar.svg";
+// Instead: https://cdn.fyscu.com/otherImages/AiAvatar.svg
 // 需要借助第三方库实现 ArrayBuffer 转换为字符串
 import { TextEncoder } from "text-encoding-shim";
 // 引用全局变量 https://nervjs.github.io/taro-docs/docs/best-practice#全局变量

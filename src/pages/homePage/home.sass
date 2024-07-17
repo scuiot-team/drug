@@ -3,18 +3,44 @@
   .card-container
     padding-bottom: 20rpx
 
+    .no-data-text
+      display: inline-block
+      font-size: 50px
+      font-weight: bold
+      color: grey
+
+    .data-text
+      display: inline-block
+      font-size: 50px
+      font-weight: bold
+      margin-right: 10px
+      color: black
+
+    .unit-text
+      display: inline-block
+      font-size: medium
+      color: grey
+
 .countdown-container
   width: 100%
   text-align: center
 
-.add-drug-btn
+.float-btn-container
   position: fixed
-  z-index: 999
+  z-index: 100
   bottom: 250px
   right: 40px
   color: white
-  padding: 10px 20px
-  cursor: pointer
+
+  .svg-icon
+    width: 70%
+    height: 70%
+
+  .secondary-btn
+    background-color: white
+    color: grey
+    margin-bottom: 20px
+
 
 .alarm-container
   text-align: center

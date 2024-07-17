@@ -1,11 +1,13 @@
 <template>
   <!-- 若显示不出图片，用原生image组件激活 -->
-  <!-- <image src="../../images/身高.png"></image>
+  <!--
+  <image src="../../images/身高.png"></image>
   <image src="../../images/体重秤.png"></image>
   <image src="../../images/血压.png"></image>
   <image src="../../images/血脂.png"></image>
   <image src="../../images/血糖.png"></image>
-  <image src="../../images/心率.png"></image> -->
+  <image src="../../images/心率.png"></image>
+  -->
   <head :title="patientInfo.name" is_back="true"></head>
   <AtDivider style="margin-top: 160rpx" content="最近一次测量数据" />
   <AtGrid
@@ -38,11 +40,11 @@
     ]"
   />
   <AtDivider content="用药计划" />
-  <view class="item">
+  <View class="item">
     <text>服用药物：{{ patientInfo.drug }}</text>
     <text>服药周期：</text>
     <text>服药进度：</text>
-  </view>
+  </View>
 </template>
 
 <script>
