@@ -9,7 +9,7 @@
       @click="navigateTo(item.url)"
     />
   </AtList>
-  <AtButton v-if="isLogin" class="logout" @click="logout">退出登录</AtButton>
+  <AtButton v-if="isLogin" class="logout" :onClick="logout">退出登录</AtButton>
 </template>
 
 
@@ -23,10 +23,7 @@ export default {
 import "./setting.sass";
 import Taro from "@tarojs/taro";
 import { useDidShow } from "@tarojs/taro";
-import {
-  set as setGlobalData,
-  get as getGlobalData,
-} from "../../utils/global_data";
+import { setGlobalData, getGlobalData } from "../../utils/global_data";
 import { ref } from "vue";
 
 let list = [

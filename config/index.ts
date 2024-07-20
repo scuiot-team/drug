@@ -7,7 +7,7 @@ import prodConfig from './prod'
 export default defineConfig(async (merge, { command, mode }) => {
   const baseConfig: UserConfigExport = {
     projectName: 'drug',
-    date: '2024-4-28',
+    date: '2024-7-18',
     designWidth: 750,
     deviceRatio: {
       640: 2.34 / 2,
@@ -17,11 +17,7 @@ export default defineConfig(async (merge, { command, mode }) => {
     },
     sourceRoot: 'src',
     outputRoot: 'dist',
-    plugins: [
-      // TMD 装了半天都装不上 依赖 Python2
-      // '@tarojs/plugin-sass',
-      // '@tarojs/plugin-terser'
-    ],
+    plugins: [],
     defineConstants: {
     },
     copy: {

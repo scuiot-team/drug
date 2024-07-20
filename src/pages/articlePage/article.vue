@@ -11,10 +11,7 @@ export default {
 <script setup>
 import "./article.sass";
 import { Taro, useLoad } from "@tarojs/taro";
-import {
-  set as setGlobalData,
-  get as getGlobalData,
-} from "../../utils/global_data";
+import { setGlobalData, getGlobalData } from "../../utils/global_data";
 import { ref } from "vue";
 
 let title = ref("文本");

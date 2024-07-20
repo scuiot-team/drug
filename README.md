@@ -1,5 +1,12 @@
 # “空巢”守护者——多功能照护智慧药箱
 
+## 项目依赖的包
+
+- `npm install taro-ui-vue3`
+- `npm install echarts4taro3`
+- `npm install --save-dev @types/sass@1.43.1`
+
+
 ## 如何运行
 
 详见 https://nervjs.github.io/taro-docs/docs/GETTING-STARTED
@@ -78,7 +85,7 @@ npm run build:weapp
     - [ ] 紧急联系人
 - [ ] 患者信息
     - [ ] 患者性别、年龄、身高、体重
-    - [ ] 患者血压、血脂、血糖、心率
+    - [x] 患者血压、血脂、血糖、心率
 - [ ] 主页面
     - [ ] 服药计划，按时提醒吃药，药物不足、过期提醒，显示药物剩余量（选），服药记录。
     - [ ] 按键控制：手动声音提示吃药、打开药箱。

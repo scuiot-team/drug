@@ -1,6 +1,8 @@
 {
   "miniprogramRoot": "dist/",
+  "projectname": "drug",
   "description": "“空巢”守护者——多功能照护智慧药箱",
+  "appid": "wxcd8e27762e5a6324",
   "setting": {
     "urlCheck": true,
     "es6": false,
@@ -12,25 +14,18 @@
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
-    },
-    "coverView": false,
-    "showShadowRootInWxmlPanel": false,
-    "packNpmRelationList": [],
-    "ignoreUploadUnusedFiles": true,
-    "minifyWXSS": true,
-    "minifyWXML": true
+    }
   },
   "compileType": "miniprogram",
+  "libVersion": "3.5.0",
   "srcMiniprogramRoot": "dist/",
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  },
   "condition": {},
   "editorSetting": {
     "tabIndent": "insertSpaces",
     "tabSize": 2
-  },
-  "appid": "wxcd8e27762e5a6324",
-  "libVersion": "3.4.3",
-  "packOptions": {
-    "ignore": [],
-    "include": []
   }
 }

@@ -50,10 +50,7 @@ export default {
 import { ref } from "vue";
 import "./selfInfo.sass";
 import Taro from "@tarojs/taro";
-import {
-  set as setGlobalData,
-  get as getGlobalData,
-} from "../../utils/global_data";
+import { setGlobalData, getGlobalData } from "../../utils/global_data";
 
 let userInfo = ref(getGlobalData("userInfo"));
 function nickNameInput(e) {

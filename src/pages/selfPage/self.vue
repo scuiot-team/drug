@@ -35,7 +35,7 @@
   >
     登录
   </AtButton>
-  <AtTabBar fixed :tabList="tabList" @click="switchTab" :current="3" />
+  <AtTabBar fixed :tabList="tabList" :onClick="switchTab" :current="3" />
 </template>
 
 <script>
@@ -48,10 +48,7 @@ export default {
 import "./self.sass";
 import Taro from "@tarojs/taro";
 import { useDidShow } from "@tarojs/taro";
-import {
-  set as setGlobalData,
-  get as getGlobalData,
-} from "../../utils/global_data";
+import { setGlobalData, getGlobalData } from "../../utils/global_data";
 import { ref } from "vue"; // ref声明响应式数据
 import { switchTab } from "../../utils/global_func";
 // Taro 引用图片

@@ -47,11 +47,8 @@ export default {
 import Taro from "@tarojs/taro";
 import "./addRecord2.sass";
 import { onMounted, ref } from "vue";
-import {
-  set as setGlobalData,
-  get as getGlobalData,
-} from "../../utils/global_data";
-import { getCurrTime, getCurrDate} from "../../utils/global_func";
+import { setGlobalData, getGlobalData } from "../../utils/global_data";
+import { getCurrTime, getCurrDate } from "../../utils/global_func";
 
 // 获取页面传入的参数
 const params = Taro.getCurrentInstance().router.params;
@@ -60,7 +57,7 @@ console.log(params);
 const paraTitle = params["title"];
 const paraName = params["name"];
 // 获取当前时间
-var currTime = ref(`${getCurrDate()} ${getCurrTime()}`);
+var currTime = ref(`${getCurrDate()}T${getCurrTime()}`);
 // 2个参数（舒张压、收缩压）
 var para1Value = ref();
 var para2Value = ref();

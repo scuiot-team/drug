@@ -39,28 +39,44 @@
     <View class="panel">
       <View class="panel-title">服药信息</View>
       <AtList hasBorder>
-        <Picker mode="time" :onChange="onIntervalChange">
+        <Picker
+          mode="time"
+          :value="state.intervalSelected"
+          :onChange="onIntervalChange"
+        >
           <AtListItem
             title="服药间隔"
             :extraText="state.intervalText"
             hasBorder
           />
         </Picker>
-        <Picker mode="date" :onChange="onStartDateChange">
+        <Picker
+          mode="date"
+          :value="state.startDateSelected"
+          :onChange="onStartDateChange"
+        >
           <AtListItem
             title="开始服用日期"
             :extraText="state.startDateSelected"
             hasBorder
           />
         </Picker>
-        <Picker mode="time" :onChange="onTimeChange">
+        <Picker
+          mode="time"
+          :value="state.timeSelected"
+          :onChange="onTimeChange"
+        >
           <AtListItem
             title="开始服用时间"
             :extraText="state.timeSelected"
             hasBorder
           />
         </Picker>
-        <Picker mode="date" :onChange="onStopDateChange">
+        <Picker
+          mode="date"
+          :value="state.stopDateSelected"
+          :onChange="onStopDateChange"
+        >
           <AtListItem
             title="停药日期"
             :extraText="state.stopDateSelected"
@@ -86,12 +102,9 @@ import Taro from "@tarojs/taro";
 import "./editDrug.sass";
 // 要使 state 对象在组件中可用，需要使用 reactive 函数将其包装
 import { reactive, ref } from "vue";
-import {
-  set as setGlobalData,
-  get as getGlobalData,
-} from "../../utils/global_data";
+import { getGlobalData } from "../../utils/global_data";
 import { getCurrDate, getCurrTime } from "../../utils/global_func";
-import DrugData from "../../utils/drugData";
+import { DrugData } from "../../utils/drugData";
 
 // 获取药物列表
 var drugs = ref(getGlobalData("drugs"));
@@ -100,7 +113,7 @@ var state = reactive({
   dosage: "",
   drugName: "",
   dose: ["口服", "含服", "吸入", "外用", "滴眼", "滴耳", "静脉注射"], // 给药方式
-  form: ["片", "胶囊", "糖浆", "散"], // 剂型
+  form: ["片", "胶囊", "糖浆", "散", "滴"], // 剂型
   doseChecked: "口服",
   formChecked: "片",
   intervalText: "30分钟",

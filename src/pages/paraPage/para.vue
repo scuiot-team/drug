@@ -1,13 +1,13 @@
 <template>
   <View>
-    <View class="headline">{{ paraTitle }}</view>
+    <View class="headline">{{ paraTitle }}</View>
     <AtFab class="add-record-btn" :onClick="addRecord">
       <Text className="at-fab__icon at-icon at-icon-add"></Text>
     </AtFab>
     <View class="bar-chart">
       <EChart ref="canvas" canvas-id="bar-canvas" />
-    </view>
-  </view>
+    </View>
+  </View>
 </template>
 
 <script>
@@ -22,10 +22,7 @@ import Taro from "@tarojs/taro";
 import "./para.sass";
 import { EChart } from "echarts4taro3";
 import { onMounted, ref } from "vue";
-import {
-  set as setGlobalData,
-  get as getGlobalData,
-} from "../../utils/global_data";
+import { setGlobalData, getGlobalData } from "../../utils/global_data";
 
 const canvas = ref(null);
 // 获取页面传入的参数
@@ -57,13 +54,13 @@ onMounted(() => {
       data: [paraTitle],
     },
     xAxis: {
-      name: '时\n间',
+      name: "时\n间",
       type: "category",
       data: paraData.map((item) => item.date),
     },
     yAxis: {
       type: "value",
-      name: paraTitle + '值',
+      name: paraTitle + "值",
     },
     series: [
       {

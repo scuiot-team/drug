@@ -1,67 +1,69 @@
 <template>
-  <View class="container">
-    <View class="fixed-top">
-      <AtInput
-        type="text"
-        placeholder="您有什么问题?"
-        :value="state.rawText"
-        :onChange="onMsgChange"
-        :onConfirm="onSendMsg"
-      >
-        <AtIcon
-          value="check-circle"
-          :color="state.iconDisabled ? '#969799' : '#5ea3ef'"
-          @click="onSendMsg"
-        ></AtIcon>
-      </AtInput>
-    </View>
-    <View class="wechat-content">
-      <View v-for="(item, index) in state.messages" :key="index">
-        <View class="wechat-dialog" v-if="item.role === 'assistant'">
-          <View class="wechat-dialog-face">
-            <AtAvatar
-              class="avatar"
-              image="https://cdn.fyscu.com/otherImages/AiAvatar.svg"
-            ></AtAvatar>
-          </View>
-          <View class="wechat-dialog-text">
-            {{ item.content }}
-          </View>
-        </View>
-        <View
-          class="wechat-dialog wechat-dialog-right"
-          v-else-if="item.role === 'user'"
+  <View>
+    <View class="container">
+      <View class="fixed-top">
+        <AtInput
+          type="text"
+          placeholder="您有什么问题?"
+          :value="state.rawText"
+          :onChange="onMsgChange"
+          :onConfirm="onSendMsg"
         >
-          <View class="wechat-dialog-face">
-            <AtAvatar class="avatar" :image="userAvatarUrl"></AtAvatar>
+          <AtIcon
+            value="check-circle"
+            :color="state.iconDisabled ? '#969799' : '#5ea3ef'"
+            :onClick="onSendMsg"
+          ></AtIcon>
+        </AtInput>
+      </View>
+      <View class="wechat-content">
+        <View v-for="(item, index) in state.messages" :key="index">
+          <View class="wechat-dialog" v-if="item.role === 'assistant'">
+            <View class="wechat-dialog-face">
+              <AtAvatar class="avatar" :image="AiAvatar"></AtAvatar>
+            </View>
+            <View class="wechat-dialog-text">
+              {{ item.content }}
+            </View>
           </View>
-          <View class="wechat-dialog-text">
-            {{ item.content }}
+          <View
+            class="wechat-dialog wechat-dialog-right"
+            v-else-if="item.role === 'user'"
+          >
+            <View class="wechat-dialog-face">
+              <AtAvatar class="avatar" :image="userAvatarUrl"></AtAvatar>
+            </View>
+            <View class="wechat-dialog-text">
+              {{ item.content }}
+            </View>
           </View>
         </View>
-      </View>
-      <View v-if="state.isLoading">
-        <View class="wechat-dialog">
-          <View class="wechat-dialog-face">
-            <AtAvatar
-              class="avatar"
-              image="https://cdn.fyscu.com/otherImages/AiAvatar.svg"
-            ></AtAvatar>
-          </View>
-          <View class="wechat-dialog-text">
-            <View v-if="state.isResponding">
-              {{ state.respondingText }}
+        <View v-if="state.isLoading">
+          <View class="wechat-dialog">
+            <View class="wechat-dialog-face">
+              <AtAvatar class="avatar" :image="AiAvatar"></AtAvatar>
             </View>
-            <View v-else>
-              <AtIcon value="loading-2"></AtIcon>
+            <View class="wechat-dialog-text">
+              <View v-if="state.isResponding">
+                {{ state.respondingText }}
+              </View>
+              <View v-else>
+                <!-- <AtLoadMore
+                  :onClick="stopLoading"
+                  status="loading"
+                  loadingText="生成中"
+                  noMoreText="。"
+                /> -->
+                <AtIcon class="loader" value="loading"></AtIcon>
+              </View>
             </View>
           </View>
         </View>
       </View>
     </View>
+    <!-- 底栏 Tabbar -->
+    <AtTabBar fixed :tabList="tabList" :onClick="switchTab" :current="2" />
   </View>
-  <!-- 底栏 Tabbar -->
-  <AtTabBar fixed :tabList="tabList" @click="switchTab" :current="2" />
 </template>
 
 <script>
@@ -73,15 +75,12 @@ export default {
 <script setup>
 import "./chat.sass";
 import Taro from "@tarojs/taro";
-// import AiAvatar from "../../images/icons/AiAvatar.svg";
+import AiAvatar from "../../images/icons/AiAvatar.svg";
 // Instead: https://cdn.fyscu.com/otherImages/AiAvatar.svg
 // 需要借助第三方库实现 ArrayBuffer 转换为字符串
-import { TextEncoder } from "text-encoding-shim";
+import { TextDecoder } from "../../utils/text_encode_shim";
 // 引用全局变量 https://nervjs.github.io/taro-docs/docs/best-practice#全局变量
-import {
-  set as setGlobalData,
-  get as getGlobalData,
-} from "../../utils/global_data";
+import { setGlobalData, getGlobalData } from "../../utils/global_data";
 import { reactive } from "vue";
 import { switchTab } from "../../utils/global_func";
 
@@ -193,5 +192,9 @@ function onSendMsg() {
   state.messages = state.messages.concat(newMessage);
   state.iconDisabled = true;
   getRespFromAI(state.messages);
+}
+
+function stopLoading() {
+  state.isLoading = false;
 }
 </script>

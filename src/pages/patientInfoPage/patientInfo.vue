@@ -57,10 +57,7 @@ export default {
 import "./patientInfo.sass";
 import Taro from "@tarojs/taro";
 import { useLoad } from "@tarojs/taro";
-import {
-  set as setGlobalData,
-  get as getGlobalData,
-} from "../../utils/global_data";
+import { setGlobalData, getGlobalData } from "../../utils/global_data";
 import PatientInfo from "../../utils/patientInfo";
 import { ref } from "vue";
 

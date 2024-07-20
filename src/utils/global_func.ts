@@ -1,13 +1,16 @@
 import Taro from "@tarojs/taro";
-import { get as getGlobalData } from "./global_data";
+import { getGlobalData } from "./global_data";
 
-export function getCurrTime() {
+export function getCurrTime(sec: Boolean = false) {
   var now = new Date();
   // 获取年、月、日
   var hours = String(now.getHours()).padStart(2, "0");
   var minutes = String(now.getMinutes()).padStart(2, "0");
-  var formattedTime = hours + ":" + minutes;
-  return formattedTime;
+  var seconds = String(now.getSeconds()).padStart(2, "0");
+  if (sec) { // 返回HH:MM:SS格式
+    return `${hours}:${minutes}:${seconds}`
+  }
+  return `${hours}:${minutes}`;
 }
 
 export function getCurrDate() {
@@ -28,3 +31,10 @@ export function switchTab(value) {
   });
 }
 
+export function genRandStr(length: number): string {
+  let str = "";
+  for (let i = 0; i < length; i++) {
+    str += String.fromCharCode(Math.floor(Math.random() * 26) + 97);
+  }
+  return str;
+}

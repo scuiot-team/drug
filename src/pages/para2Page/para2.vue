@@ -22,10 +22,7 @@ import Taro from "@tarojs/taro";
 import "./para2.sass";
 import { EChart } from "echarts4taro3";
 import { onMounted, ref } from "vue";
-import {
-  set as setGlobalData,
-  get as getGlobalData,
-} from "../../utils/global_data";
+import { setGlobalData, getGlobalData } from "../../utils/global_data";
 
 const canvas = ref(null);
 // 获取页面传入的参数
@@ -54,26 +51,26 @@ onMounted(() => {
       },
     },
     legend: {
-      data: ['收缩压', '舒张压']
+      data: ["收缩压", "舒张压"],
     },
     xAxis: {
-      name: '时\n间',
+      name: "时\n间",
       type: "category",
       data: paraData.map((item) => item.date),
     },
     yAxis: {
       type: "value",
-      name: '血压值'
+      name: "血压值",
     },
     series: [
       {
-        name: '收缩压',
+        name: "收缩压",
         data: paraData.map((item) => item.high),
         type: "line",
         smooth: true,
       },
       {
-        name: '舒张压',
+        name: "舒张压",
         data: paraData.map((item) => item.low),
         type: "line",
         smooth: true,

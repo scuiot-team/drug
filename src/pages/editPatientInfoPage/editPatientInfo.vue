@@ -85,7 +85,7 @@
         :maxLength="200"
         placeholder="患者的饮食喜好、禁忌等..."
       />
-    </view>
+    </View>
     <View class="textarea">
       <text class="title">身体状况</text>
       <AtTextarea
@@ -95,9 +95,9 @@
         :maxLength="200"
         placeholder="患者身体状况，是否残疾、生活是否自理等..."
       />
-    </view>
+    </View>
   </AtAccordion>
-  <AtButton v-if="id == -1" class="save" @click="save">添加</AtButton>
+  <AtButton v-if="id == -1" class="save" :onClick="save">添加</AtButton>
 </template>
 
 
@@ -111,11 +111,7 @@ export default {
 import "./editPatientInfo.sass";
 import Taro from "@tarojs/taro";
 import { useLoad } from "@tarojs/taro";
-import {
-  set as setGlobalData,
-  get as getGlobalData,
-  set,
-} from "../../utils/global_data";
+import { setGlobalData, getGlobalData } from "../../utils/global_data";
 import PatientInfo from "../../utils/patientInfo";
 import { ref } from "vue"; //声明响应式数据
 

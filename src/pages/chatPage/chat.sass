@@ -77,6 +77,16 @@ page // 全局页面样式
           position: absolute
           transform: rotate(45deg)
 
+        .loader
+          color: #4e4e4e
+          animation: spin 1s linear infinite // 应用动画效果
+
+        @keyframes spin
+          0%
+            transform: rotate(0deg) // 旋转0度
+          100%
+            transform: rotate(720deg) // 旋转360度，即一圈
+
     .wechat-dialog-right // 如果对话框在右侧（自己）
       justify-content: flex-end
 

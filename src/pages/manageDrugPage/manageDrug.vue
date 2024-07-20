@@ -44,12 +44,9 @@ import Taro from "@tarojs/taro";
 import "./manageDrug.sass";
 // 要使 state 对象在组件中可用，需要使用 reactive 函数将其包装
 import { reactive, ref } from "vue";
-import {
-  set as setGlobalData,
-  get as getGlobalData,
-} from "../../utils/global_data";
+import { setGlobalData, getGlobalData } from "../../utils/global_data";
 import { getCurrDate, getCurrTime } from "../../utils/global_func";
-import DrugData from "../../utils/drugData";
+import { DrugData } from "../../utils/drugData";
 
 // 获取页面传入的参数
 const params = Taro.getCurrentInstance().router.params;

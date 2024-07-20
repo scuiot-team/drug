@@ -18,7 +18,7 @@
       :value="password"
       :onChange="passwordInput.bind(this)"
     />
-    <AtButton class="login" @click="login">保存</AtButton>
+    <AtButton class="login" :onClick="login">保存</AtButton>
   </View>
 </template>
 
@@ -31,10 +31,7 @@ export default {
 <script setup>
 import "./login.sass";
 import Taro from "@tarojs/taro";
-import {
-  set as setGlobalData,
-  get as getGlobalData,
-} from "../../utils/global_data";
+import { setGlobalData, getGlobalData } from "../../utils/global_data";
 
 let account = "";
 let password = "";

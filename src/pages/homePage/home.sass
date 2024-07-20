@@ -41,7 +41,6 @@
     color: grey
     margin-bottom: 20px
 
-
 .alarm-container
   text-align: center
 
@@ -55,3 +54,55 @@
       color: #635617
     &.dose
       color: #4faf70
+
+.time-up-cover
+  position: absolute
+  height: 100%
+  width: 100%
+  z-index: 998
+  background: linear-gradient(to bottom, #ffffffff, #5d89ed63)
+  -webkit-backdrop-filter: blur(10rpx)
+  backdrop-filter: blur(10rpx)
+  text-align: center
+
+  &.warning
+    background: linear-gradient(to bottom, #ffffffff, #f3cb1863)
+    z-index: 999
+
+  .prompt
+    color: #5a5a5a
+
+  .drug-info-container
+    margin-top: 40%
+
+    .drug-name
+      font-size: xx-large
+      color: #1e1e1e
+      font-weight: bold
+
+    .drug-dose
+      margin-top: 20rpx
+      color: #4faf70
+      font-size: large
+
+    .drug-form
+      color: #da4f7a
+      font-size: large
+
+  .btn-container
+    z-index: 1000
+    width: 60%
+    margin-left: auto
+    margin-right: auto
+    margin-top: 50rpx
+
+    .done-btn
+      margin-top: 20rpx
+      background-color: transparent
+
+    .skip-btn
+      background-color: transparent
+
+  .drug-date
+    margin-top: 50rpx
+    color: #e53f73

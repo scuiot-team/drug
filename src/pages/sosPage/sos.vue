@@ -7,7 +7,7 @@
     :value="urgentPhone"
     :onChange="phoneInput.bind(this)"
   />
-  <AtButton class="save" @click="save">保存</AtButton>
+  <AtButton class="save" :onClick="save">保存</AtButton>
 </template>
 
 <script>
@@ -20,10 +20,7 @@ export default {
 import "./sos.sass";
 import Taro from "@tarojs/taro";
 import { useDidShow } from "@tarojs/taro";
-import {
-  set as setGlobalData,
-  get as getGlobalData,
-} from "../../utils/global_data";
+import { setGlobalData, getGlobalData } from "../../utils/global_data";
 import { ref } from "vue";
 
 let urgentPhone = ref(getGlobalData("userInfo").urgentPhone);

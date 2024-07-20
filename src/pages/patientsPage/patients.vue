@@ -1,5 +1,5 @@
 <template>
-  <scroll-view class="scrollview" scroll-y="true">
+  <scroll-view class="scrollview" scroll-y>
     <View class="scrollbody">
       <View class="card" v-for="(item, index) in patients" :key="index">
         <AtAvatar
@@ -71,10 +71,7 @@ export default {
 import "./patients.sass";
 import Taro from "@tarojs/taro";
 import { useDidShow } from "@tarojs/taro";
-import {
-  set as setGlobalData,
-  get as getGlobalData,
-} from "../../utils/global_data";
+import { setGlobalData, getGlobalData } from "../../utils/global_data";
 import { ref } from "vue";
 
 let patients = ref(getGlobalData("patients"));
