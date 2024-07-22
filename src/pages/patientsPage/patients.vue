@@ -1,63 +1,68 @@
 <template>
-  <scroll-view class="scrollview" scroll-y>
-    <View class="scrollbody">
-      <View class="card" v-for="(item, index) in patients" :key="index">
-        <AtAvatar
-          class="avatar"
-          :image="item.avatar"
-          @click="navigateTo('/pages/patientInfoPage/patientInfo?id=', index)"
-        ></AtAvatar>
-        <View class="info">
-          <text class="name">{{ item.name }}</text>
-          <View class="icon-text">
-            <image
-              src="../../images/拨号.png"
-              style="width: 40rpx; height: 40rpx; margin-right: 10rpx"
-            ></image>
-            <text>{{ item.phone }}</text>
-          </View>
-          <View class="icon-text">
-            <image
-              src="../../images/慢性病.png"
-              style="width: 40rpx; height: 40rpx; margin-right: 10rpx"
-            ></image>
-            <text>{{ item.illness }}</text>
-          </View>
-          <AtIcon
-            class="icon"
-            value="user"
-            color="#1E90FF"
-            style="right: 170rpx"
+  <View class="root">
+    <scroll-view class="scrollview" scroll-y>
+      <View class="scrollbody">
+        <View class="card" v-for="(item, index) in patients" :key="index">
+          <AtAvatar
+            class="avatar"
+            :image="item.avatar"
             @click="navigateTo('/pages/patientInfoPage/patientInfo?id=', index)"
-          ></AtIcon>
-          <AtIcon
-            class="icon"
-            value="trash"
-            color="#CD2626"
-            style="right: 100rpx"
-            @click="deletePatient(index)"
-          ></AtIcon>
-          <AtIcon
-            class="icon"
-            value="settings"
-            color="#363636"
-            style="right: 30rpx"
-            @click="
-              navigateTo(
-                '/pages/editPatientInfoPage/editPatientInfo?id=',
-                index
-              )
-            "
-          ></AtIcon>
+          ></AtAvatar>
+          <View class="info">
+            <text class="name">{{ item.name }}</text>
+            <View class="icon-text">
+              <image
+                :src="phoneIconUrl"
+                style="width: 40rpx; height: 40rpx; margin-right: 10rpx"
+              ></image>
+              <text>{{ item.phone }}</text>
+            </View>
+            <View class="icon-text">
+              <image
+                :src="diseaseIconUrl"
+                style="width: 40rpx; height: 40rpx; margin-right: 10rpx"
+              ></image>
+              <text>{{ item.illness }}</text>
+            </View>
+            <AtIcon
+              class="icon"
+              value="user"
+              color="#1E90FF"
+              style="right: 170rpx"
+              @click="
+                navigateTo('/pages/patientInfoPage/patientInfo?id=', index)
+              "
+            ></AtIcon>
+            <AtIcon
+              class="icon"
+              value="trash"
+              color="#CD2626"
+              style="right: 100rpx"
+              @click="deletePatient(index)"
+            ></AtIcon>
+            <AtIcon
+              class="icon"
+              value="settings"
+              color="#363636"
+              style="right: 30rpx"
+              @click="
+                navigateTo(
+                  '/pages/editPatientInfoPage/editPatientInfo?id=',
+                  index
+                )
+              "
+            ></AtIcon>
+          </View>
         </View>
       </View>
-    </View>
-  </scroll-view>
-  <AtButton
-    class="add"
-    @click="navigateTo('/pages/editPatientInfoPage/editPatientInfo?id=', -1)"
-    >添加监护患者</AtButton
-  >
+    </scroll-view>
+    <AtButton
+      class="add"
+      @click="navigateTo('/pages/editPatientInfoPage/editPatientInfo?id=', -1)"
+    >
+      添加监护患者
+    </AtButton>
+  </View>
 </template>
 
 
@@ -73,6 +78,9 @@ import Taro from "@tarojs/taro";
 import { useDidShow } from "@tarojs/taro";
 import { setGlobalData, getGlobalData } from "../../utils/global_data";
 import { ref } from "vue";
+// 静态资源
+import phoneIconUrl from "../../images/icons/拨号.svg";
+import diseaseIconUrl from "../../images/icons/疾病.svg";
 
 let patients = ref(getGlobalData("patients"));
 let isLogin = getGlobalData("userInfo").isLogin;

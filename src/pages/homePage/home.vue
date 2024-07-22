@@ -283,7 +283,7 @@ function toggleFloatBtn() {
 }
 
 function updateToNext() {
-  return;
+  // return;
   console.log("获取未服药的药物 和 下一次服药的药物");
   // 获取未服药的药物 和 下一次服药的药物
   let untokens = getUntokenDrugs(drugs.value, drugRecord.value);

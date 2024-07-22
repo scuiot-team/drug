@@ -1,6 +1,6 @@
 import mqtt from "./mqtt.min.js";
 import { getGlobalData } from "./global_data";
-import { genRandStr } from "./global_func.js";
+import { genRandStr } from "./global_func";
 import Taro from "@tarojs/taro";
 
 let host = getGlobalData('MQTTurl');
@@ -11,7 +11,8 @@ const mqttOptions = {
   connectTimeout: 4000,
   clientId: 'wechat_' + genRandStr(6),
   username: 'nanguagua',
-  password: atob("RU1RWG5nZzEyMw=="),
+  // password: atob("RU1RWG5nZzEyMw=="), // 我靠，这个atob会导致真机预览和真机调试失败白屏！！！
+  password: 'EQMXngg123',
   clean: true, // Clean session
 };
 

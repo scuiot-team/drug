@@ -48,9 +48,9 @@ import { setGlobalData, getGlobalData } from "../../utils/global_data";
 import { getCurrDate, getCurrTime } from "../../utils/global_func";
 import { DrugData } from "../../utils/drugData";
 
-// 获取页面传入的参数
-const params = Taro.getCurrentInstance().router.params;
-console.log(params);
+// // 获取页面传入的参数
+// const params = Taro.getCurrentInstance().router.params;
+// console.log(params);
 
 // 本页面的一些变量
 var state = reactive({

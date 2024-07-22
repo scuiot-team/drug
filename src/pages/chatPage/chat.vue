@@ -1,5 +1,5 @@
 <template>
-  <View>
+  <View class="root">
     <View class="container">
       <View class="fixed-top">
         <AtInput

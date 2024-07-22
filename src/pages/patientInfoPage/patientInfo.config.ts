@@ -1,6 +1,10 @@
+// export default definePageConfig({
+//   navigationStyle: 'custom',
+//   usingComponents: {
+//     "head": "../../myComponent/head/head"
+//   }
+// })
+
 export default definePageConfig({
-  navigationStyle: 'custom',
-  usingComponents: {
-    "head": "../../myComponent/head/head"
-  }
+  navigationBarTitleText: '患者信息'
 })

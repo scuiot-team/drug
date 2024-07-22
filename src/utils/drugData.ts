@@ -141,16 +141,17 @@ export function getUntokenDrugs(drugs: DrugData[], drugRecord: DrugRecord[]): [
     let interval = toStamp(drug.interval);
     if (startstamp <= nowTime && nowTime <= stopstamp) {
       // 最新服药记录
+      let latestStamp = startstamp; // 如果是第一次服药，则最新服药记录为开始服药时间
       let latestRecord = classifiedDrugRecord[drug.id].slice(-1)[0];
-      if (latestRecord === undefined) {
-        // TODO
+      if (latestRecord !== undefined) {
+        // 说明该药物有服药记录=不是第一次服药
+        latestStamp = toTimeStamp(latestRecord.date, latestRecord.time);
       }
-      let lateststamp = toTimeStamp(latestRecord.date, latestRecord.time);
       // 找到下一个服药时间
-      // console.log("id:", drug.id, "lateststamp:", lateststamp, nowTime);
-      while (lateststamp <= nowTime) {
-        lateststamp += interval;
-        let [d, h, m, s] = getDHMS(lateststamp);
+      // console.log("id:", drug.id, "latestStamp:", latestStamp, nowTime);
+      while (latestStamp <= nowTime) {
+        latestStamp += interval;
+        let [d, h, m, s] = getDHMS(latestStamp);
         result.push(
           new DrugRecord(
             drug.id,
@@ -164,7 +165,7 @@ export function getUntokenDrugs(drugs: DrugData[], drugRecord: DrugRecord[]): [
         );
         // console.log("pushed:", result[result.length - 1]);
       }
-      // 此时 lateststamp > nowTime
+      // 此时 latestStamp > nowTime
       let tmp = result.pop(); // result 的最后一个值舍去
       if (tmp != undefined) {
         nextDrug.push(tmp); // 存入nextDrug
@@ -208,11 +209,16 @@ export function getFutureDrugs(
     let interval = toStamp(drug.interval);
     if (startstamp <= begStamp && begStamp <= stopstamp) {
       // 最新服药记录的时间（timestamp）
-      let latestRecordTime = DrugRecord.getTime(classifiedDrugRecord[drug.id].slice(-1)[0]);
+      let latestStamp = startstamp; // 如果是第一次服药，则最新服药记录为开始服药时间
+      let latestRecord = classifiedDrugRecord[drug.id].slice(-1)[0];
+      if (latestRecord !== undefined) {
+        // 说明该药物有服药记录=不是第一次服药
+        latestStamp = DrugRecord.getTime(latestRecord);
+      }
       // 找到大于begStamp的下一个服药时间
-      let N = Math.ceil((begStamp - latestRecordTime) / interval);
-      if (N > 0) { // begStamp > latestRecordTime
-        let nextTime = latestRecordTime + N * interval;
+      let N = Math.ceil((begStamp - latestStamp) / interval);
+      if (N > 0) { // begStamp > latestStamp
+        let nextTime = latestStamp + N * interval;
         while (nextTime <= endStamp) {
           let [d, h, m, s] = getDHMS(nextTime);
           result.push(

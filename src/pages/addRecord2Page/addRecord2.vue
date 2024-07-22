@@ -1,5 +1,5 @@
 <template>
-  <View>
+  <View class="root">
     <View class="headline"> 添加{{ paraTitle }}记录 </View>
     <AtForm>
       <AtInput

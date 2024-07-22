@@ -19,6 +19,7 @@ export default {
 
 <script setup>
 import Taro from "@tarojs/taro";
+import { useDidShow } from "@tarojs/taro";
 import "./para.sass";
 import { EChart } from "echarts4taro3";
 import { onMounted, ref } from "vue";
@@ -28,10 +29,16 @@ const canvas = ref(null);
 // 获取页面传入的参数
 const params = Taro.getCurrentInstance().router.params;
 // 获取健康指标名称
-const paraTitle = params["title"];
-const paraName = params["name"];
+let paraTitle = params["title"];
+let paraName = params["name"];
 // 获取健康指标数据
-const paraData = getGlobalData("healthIndicators")[paraName];
+let paraData = getGlobalData("healthIndicators")[paraName];
+
+// 更新页面数据
+useDidShow((e) => {
+  console.log("fetch data again");
+  // TODO
+});
 
 function addRecord() {
   console.log("addRecord");

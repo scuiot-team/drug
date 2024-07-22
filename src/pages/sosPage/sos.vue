@@ -1,13 +1,16 @@
 <template>
-  <AtInput
-    class="input"
-    title="联系电话"
-    type="nubmer"
-    placeholder="请输入电话号码"
-    :value="urgentPhone"
-    :onChange="phoneInput.bind(this)"
-  />
-  <AtButton class="save" :onClick="save">保存</AtButton>
+  <View class="root">
+    <View class="headline">设置紧急联系人号码</View>
+    <AtInput
+      class="input"
+      title="电话"
+      type="number"
+      placeholder="请输入电话号码"
+      :value="urgentPhone"
+      :onChange="phoneInput.bind(this)"
+    />
+    <AtButton type="primary" class="save" :onClick="save">保存</AtButton>
+  </View>
 </template>
 
 <script>
@@ -23,13 +26,13 @@ import { useDidShow } from "@tarojs/taro";
 import { setGlobalData, getGlobalData } from "../../utils/global_data";
 import { ref } from "vue";
 
-let urgentPhone = ref(getGlobalData("userInfo").urgentPhone);
+let urgentPhone = ref(String(getGlobalData("userInfo").urgentPhone));
 function phoneInput(e) {
   console.log(e);
   urgentPhone.value = e;
 }
 function save() {
-  if (urgentPhone.value) {
+  if (urgentPhone.value !== "") {
     console.log("save");
     let userInfo = getGlobalData("userInfo");
     userInfo.urgentPhone = urgentPhone.value;

@@ -1,5 +1,7 @@
 <template>
-  <text>你好</text>
+  <view class="root">
+    <text>你好</text>
+  </view>
 </template>
 
 

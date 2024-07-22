@@ -1,43 +1,48 @@
 <template>
-  <head title="个人信息" is_back="true"></head>
-  <image src="https://zgsdwz.top/static/image/背景-橘.jpg" class="back"></image>
-  <button
-    class="avatar"
-    open-type="chooseAvatar"
-    :onChooseavatar="onChooseAvatar.bind(this)"
-  >
+  <View class="root">
+    <head title="个人信息" is_back="true"></head>
     <image
-      :src="userInfo.avatar"
-      style="display: block; width: 100%; height: 100%"
+      src="https://zgsdwz.top/static/image/背景-橘.jpg"
+      class="back"
     ></image>
-  </button>
-  <AtInput
-    class="item"
-    placeholderClass="placeholder"
-    title="昵称"
-    type="text"
-    placeholder="请输入昵称"
-    :value="userInfo.nickName"
-    :onChange="nickNameInput.bind(this)"
-  />
-  <AtInput
-    class="item"
-    placeholderClass="placeholder"
-    title="姓名"
-    type="text"
-    placeholder="请输入姓名"
-    :value="userInfo.name"
-    :onChange="nameInput.bind(this)"
-  />
-  <AtInput
-    class="item"
-    placeholderClass="placeholder"
-    title="手机号"
-    type="phone"
-    placeholder="请输入手机号"
-    :value="userInfo.phone"
-    :onChange="phoneInput.bind(this)"
-  />
+    <button
+      class="avatar"
+      open-type="chooseAvatar"
+      :onChooseavatar="onChooseAvatar.bind(this)"
+    >
+      <image
+        :src="userInfo.avatar"
+        style="display: block; width: 100%; height: 100%"
+      ></image>
+    </button>
+    <AtInput
+      class="item"
+      placeholderClass="placeholder"
+      title="昵称"
+      type="text"
+      placeholder="请输入昵称"
+      :value="userInfo.nickName"
+      :onChange="nickNameInput.bind(this)"
+    />
+    <AtInput
+      class="item"
+      placeholderClass="placeholder"
+      title="姓名"
+      type="text"
+      placeholder="请输入姓名"
+      :value="userInfo.name"
+      :onChange="nameInput.bind(this)"
+    />
+    <AtInput
+      class="item"
+      placeholderClass="placeholder"
+      title="手机号"
+      type="phone"
+      placeholder="请输入手机号"
+      :value="userInfo.phone"
+      :onChange="phoneInput.bind(this)"
+    />
+  </View>
 </template>
 
 <script>

@@ -1,4 +1,0 @@
-<view class="head" style="{{custom_style}}">
-  <text class="title">{{title}}</text>
-  <image wx:if="{{is_back}}" src="https://zgsdwz.top/static/icon/返回图标.png" class="icon" bind:tap="back"></image>
-</view>

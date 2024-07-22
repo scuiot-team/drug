@@ -1,5 +1,5 @@
 <template>
-  <View>
+  <View class="root">
     <View class="headline"> 添加{{ paraTitle }}记录 </View>
     <AtForm>
       <AtInput
@@ -68,7 +68,7 @@ function saveRecord(params) {
   console.log("saveRecord");
   console.log("get time:", currTime.value);
   console.log("get value:", paraValue.value);
-  let healthIndicators = ref(Data("healthIndicators"));
+  let healthIndicators = ref(getGlobalData("healthIndicators"));
   let currTimeSplit = currTime.value.split(" ");
   healthIndicators.value[paraName].push({
     date: currTimeSplit[0], // TODO: 用户填写不规范可能会出bug

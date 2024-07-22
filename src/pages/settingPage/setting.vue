@@ -1,15 +1,19 @@
 <template>
-  <AtList class="menu" :hasBorder="false">
-    <AtListItem
-      class="item"
-      v-for="(item, index) in list"
-      :key="index"
-      :title="item.title"
-      arrow="right"
-      @click="navigateTo(item.url)"
-    />
-  </AtList>
-  <AtButton v-if="isLogin" class="logout" :onClick="logout">退出登录</AtButton>
+  <View class="root">
+    <AtList class="menu" :hasBorder="false">
+      <AtListItem
+        class="item"
+        v-for="(item, index) in list"
+        :key="index"
+        :title="item.title"
+        arrow="right"
+        @click="navigateTo(item.url)"
+      />
+    </AtList>
+    <AtButton v-if="isLogin" class="logout" :onClick="logout"
+      >退出登录</AtButton
+    >
+  </View>
 </template>
 
 

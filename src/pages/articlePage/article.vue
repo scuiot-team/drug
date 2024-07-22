@@ -1,5 +1,7 @@
 <template>
-  <head :title="title" is_back="true"></head>
+  <View class="root">
+    <head :title="title" is_back="true"></head>
+  </View>
 </template>
 
 <script>

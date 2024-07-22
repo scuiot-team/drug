@@ -1,50 +1,29 @@
 <template>
-  <!-- 若显示不出图片，用原生image组件激活 -->
-  <!--
-  <image src="../../images/身高.png"></image>
-  <image src="../../images/体重秤.png"></image>
-  <image src="../../images/血压.png"></image>
-  <image src="../../images/血脂.png"></image>
-  <image src="../../images/血糖.png"></image>
-  <image src="../../images/心率.png"></image>
-  -->
-  <head :title="patientInfo.name" is_back="true"></head>
-  <AtDivider style="margin-top: 160rpx" content="最近一次测量数据" />
-  <AtGrid
-    class="grid"
-    :data="[
-      {
-        image: '../../images/身高.png',
-        value: '身高：' + patientInfo.height + 'cm',
-      },
-      {
-        image: '../../images/体重秤.png',
-        value: '体重：' + patientInfo.weight + 'kg',
-      },
-      {
-        image: '../../images/血压.png',
-        value: '血压：' + patientInfo.BP + 'mmHg',
-      },
-      {
-        image: '../../images/血脂.png',
-        value: '血脂：' + patientInfo.BF + 'mg/dL',
-      },
-      {
-        image: '../../images/血糖.png',
-        value: '血糖：' + patientInfo.BG + 'mg/dL',
-      },
-      {
-        image: '../../images/心率.png',
-        value: '心率：' + patientInfo.HR + '次/分钟',
-      },
-    ]"
-  />
-  <AtDivider content="用药计划" />
-  <View class="item">
-    <text>服用药物：{{ patientInfo.drug }}</text>
-    <text>服药周期：</text>
-    <text>服药进度：</text>
-  </View>
+  <scroll-view class="root" scroll-y>
+    <View class="headline">{{ patientInfo.name }}</View>
+    <AtDivider content="最近一次测量数据" />
+    <AtGrid class="grid" :data="data" />
+    <AtDivider content="用药计划" />
+    <View class="panel">
+      <View class="panel-title">服用药物</View>
+      <AtList v-for="(drug, index) in state.drugs" :key="index">
+        <AtSwipeAction
+          autoClose
+          :options="options"
+          :onClick="onClickSwipe.bind(this, index)"
+        >
+          <AtListItem
+            hasBorder
+            class="normal"
+            :title="drug.drugName"
+            :extraText="`${drug.dosage} ${drug.form} ${drug.dose}`"
+          />
+        </AtSwipeAction>
+      </AtList>
+      <!-- <View class="panel-title">服药周期</View>
+      <View class="panel-title">服药进度</View> -->
+    </View>
+  </scroll-view>
 </template>
 
 <script>
@@ -59,12 +38,108 @@ import Taro from "@tarojs/taro";
 import { useLoad } from "@tarojs/taro";
 import { setGlobalData, getGlobalData } from "../../utils/global_data";
 import PatientInfo from "../../utils/patientInfo";
-import { ref } from "vue";
+import { DrugData } from "../../utils/drugData";
+import { ref, reactive } from "vue";
 
+// 静态资源
+import bloodPressureUrl from "../../images/icons/bloodPressure.svg";
+import bloodGlucoseUrl from "../../images/icons/bloodGlucose.svg";
+import weightUrl from "../../images/icons/weight.svg";
+import heightUrl from "../../images/icons/height.svg";
+import heartrateUrl from "../../images/icons/heartrate.svg";
+import paO2Url from "../../images/icons/paO2.svg";
+
+// 健康指标
+let healthIndicators = ref(getGlobalData("healthIndicators"));
+// 患者信息
 let patientInfo = ref(new PatientInfo());
+
+// 本页面的一些变量
+var state = reactive({
+  // 获取药物列表
+  drugs: getGlobalData("drugs"),
+});
+
+let options = [
+  {
+    text: "编辑",
+    style: {
+      backgroundColor: "#6190E8",
+    },
+  },
+  {
+    text: "删除",
+    style: {
+      backgroundColor: "#FF4949",
+    },
+  },
+];
+let data = [
+  {
+    image: heightUrl,
+    value:
+      "身高\n" + healthIndicators.value.heightData.slice(-1)[0].value + "cm",
+  },
+  {
+    image: weightUrl,
+    value:
+      "体重\n" + healthIndicators.value.weightData.slice(-1)[0].value + "kg",
+  },
+  {
+    image: bloodPressureUrl,
+    value:
+      "血压\n" +
+      healthIndicators.value.bloodPressureData.slice(-1)[0].high +
+      "/" +
+      healthIndicators.value.bloodPressureData.slice(-1)[0].low +
+      "mmHg",
+  },
+  {
+    image: paO2Url,
+    value:
+      "血氧饱和度\n" +
+      healthIndicators.value.bloodOxygenData.slice(-1)[0].value +
+      "%",
+  },
+  {
+    image: bloodGlucoseUrl,
+    value:
+      "血糖\n" +
+      healthIndicators.value.bloodGlucoseData.slice(-1)[0].value +
+      "mg/dL",
+  },
+  {
+    image: heartrateUrl,
+    value:
+      "心率\n" +
+      healthIndicators.value.heartRateData.slice(-1)[0].value +
+      "次/分钟",
+  },
+];
+
 // 接收页面传参
 useLoad((o) => {
   let id = o.id;
   patientInfo.value = getGlobalData("patients")[id];
 });
+
+function onClickSwipe(index, params) {
+  console.log(index, params);
+  if (params.text === "删除") {
+    Taro.showModal({
+      title: "提示",
+      content: "是否确认删除该药物？",
+      confirmText: "确定",
+      success: (res) => {
+        if (res.confirm) {
+          state.drugs.splice(index, 1);
+        }
+      },
+    });
+  } else if (params.text === "编辑") {
+    // TODO: edit drug
+    Taro.navigateTo({ url: `../editDrugPage/editDrug?index=${index}` });
+    return;
+  }
+}
 </script>

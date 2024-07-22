@@ -21,6 +21,7 @@ export default defineAppConfig({
     'pages/addDrugPage/addDrug',
     'pages/manageDrugPage/manageDrug',
     'pages/editDrugPage/editDrug',
+    'pages/bindPage/bind',
   ],
   window: {
     backgroundTextStyle: 'light',

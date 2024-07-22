@@ -1,5 +1,5 @@
 <template>
-  <View>
+  <View class="root">
     <View class="headline"> 添加药物 </View>
     <View class="panel">
       <View class="panel-title">药物信息</View>
