@@ -2,11 +2,12 @@ import mqtt from "./mqtt.min.js";
 import { ref } from "vue";
 import { DrugInfo } from "./drugData";
 import { getGlobalData } from "./global_data";
-import { genRandStr } from "./global_func";
+import { genRandStr, getTime, getDate } from "./global_func";
 import Taro from "@tarojs/taro";
 
 let host = getGlobalData('MQTTurl');
 let drugStock = ref(getGlobalData('drugStock'));
+let healthIndicators = ref(getGlobalData('healthIndicators'));
 let client: any = null; // 初始化MQTT client
 
 const mqttOptions = {
@@ -39,6 +40,8 @@ export function connect() {
       if (drug_id) {
         subscribe(`drug/${drug_id}/slip`);
         subscribe(`drug/${drug_id}/adddrug`);
+        subscribe(`drug/${drug_id}/heartrate`);
+        subscribe(`drug/${drug_id}/spo2`);
       } else {
         console.log("未绑定药盒");
         Taro.showModal({
@@ -79,6 +82,36 @@ export function connect() {
                 showCancel: false,
               });
             }
+          }
+        }
+        if (topic === `drug/${drug_id}/heartrate`) {
+          payload.timestamp = payload.timestamp * 1000;
+          if (payload.code === 200) {
+            healthIndicators.value.heartRateData.push({
+              date: getDate(payload.timestamp),
+              time: getTime(payload.timestamp),
+              value: payload.heartrate,
+            })
+            console.log("heartrate:", healthIndicators.value.heartRateData);
+            Taro.showModal({
+              content: `${payload.message}：${payload.heartrate}`,
+              showCancel: false,
+            });
+          }
+        }
+        if (topic === `drug/${drug_id}/spo2`) {
+          payload.timestamp = payload.timestamp * 1000;
+          if (payload.code === 200) {
+            healthIndicators.value.bloodOxygenData.push({
+              date: getDate(payload.timestamp),
+              time: getTime(payload.timestamp),
+              value: payload.spo2,
+            })
+            console.log("spo2:", healthIndicators.value.bloodOxygenData);
+            Taro.showModal({
+              content: `${payload.message}：${payload.spo2}`,
+              showCancel: false,
+            });
           }
         }
       });

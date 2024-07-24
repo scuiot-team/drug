@@ -279,7 +279,7 @@ function toggleFloatBtn() {
 
 function updateToNext() {
   // return;
-  console.log("获取未服药的药物 和 下一次服药的药物");
+  // console.log("获取未服药的药物 和 下一次服药的药物");
   // 获取未服药的药物 和 下一次服药的药物
   let untokens = getUntokenDrugs(drugs.value, drugRecord.value);
   state.untokenDrugs = untokens[0];
@@ -309,11 +309,20 @@ function done(skip = false) {
 }
 
 function untokenDone(skip = false) {
-  console.log("删除未服药药物");
+  // console.log("删除未服药药物");
   // 删除未服药的第一个药物
   let tmp = state.untokenDrugs.shift();
   // 如果选择跳过，虽然仍然会被放入已服用，但是标记skip=true
   tmp.skip = skip;
+  // 用于调试
+  console.log(`new DrugRecord("${tmp.id}", \
+"${tmp.drugName}", \
+"${tmp.dosage}", \
+"${tmp.form}", \
+"${tmp.dose}", \
+"${tmp.date}", \
+"${tmp.time}", \
+"${skip}")`);
   drugRecord.value.push(tmp);
   updateToNext();
 }

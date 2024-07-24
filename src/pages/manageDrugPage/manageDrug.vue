@@ -34,9 +34,14 @@
           :thumb="drugInfo.otc ? otcUrl : RxUrl"
           :extra="toDate(Number(drugInfo.time) * 1000) + '存入'"
         >
-          用法用量：{{ drugInfo.use }}
-          <br />
-          功能主治：{{ drugInfo.func }}
+          <View>
+            <Text class="bold-text">用法用量</Text>
+            ：{{ drugInfo.use }}
+          </View>
+          <View>
+            <Text class="bold-text">功能主治</Text>
+            ：{{ drugInfo.func }}
+          </View>
         </AtCard>
       </View>
     </View>
@@ -63,7 +68,6 @@ import "./manageDrug.sass";
 // 要使 state 对象在组件中可用，需要使用 reactive 函数将其包装
 import { reactive, ref } from "vue";
 import { setGlobalData, getGlobalData } from "../../utils/global_data";
-import { getCurrDate, getCurrTime } from "../../utils/global_func";
 import { DrugInfo, DrugData } from "../../utils/drugData";
 import otcUrl from "../../images/icons/OTC.svg";
 import RxUrl from "../../images/icons/Rx.svg";

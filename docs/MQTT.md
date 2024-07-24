@@ -64,6 +64,55 @@
 
 ### 小程序端
 
-绑定好设备后，订阅主题 `drug/id/adddrug`
+绑定好设备后，订阅主题 `drug/id/adddrug`，若获取到 `code=200` 的消息，则：
 
-若获取到code=200的消息，则弹窗提醒。消息就是message里的内容。
+- 弹窗提醒（消息就是message里的内容）
+- 将 druginfo 加入全局药物存储（drugStock）
+
+## 录入健康指标
+
+### 心率
+
+#### 设备端
+
+发布下面的json到主题：`drug/id/heartrate`
+
+```json
+{
+  "id": "a1b2c3d4",
+  "code": 200,
+  "message": "增加心率数据",
+  "heartrate": 65,
+  "timestamp": 1721804283
+}
+```
+
+#### 小程序端
+
+订阅主题：`drug/id/heartrate`，若获取到 `code=200` 的消息，则：
+
+- 弹窗提醒（消息就是message里的内容）
+- 将 heartrate 加入患者心跳数据
+
+### 血氧饱和度（SpO2）
+
+#### 设备端
+
+发布下面的json到主题：`drug/id/spo2`
+
+```json
+{
+  "id": "a1b2c3d4",
+  "code": 200,
+  "message": "增加血氧饱和度数据",
+  "spo2": 99,
+  "timestamp": 1721804283
+}
+```
+
+#### 小程序端
+
+订阅主题：`drug/id/spo2`，若获取到 `code=200` 的消息，则：
+
+- 弹窗提醒（消息就是message里的内容）
+- 将 spo2 加入患者血氧数据

@@ -24,7 +24,7 @@ import Taro from "@tarojs/taro";
 import { setGlobalData, getGlobalData } from "../../utils/global_data";
 import { reactive, ref } from "vue";
 import { DrugRecord, getFutureDrugs } from "../../utils/drugData";
-import { getCurrDate, getCurrTime, switchTab } from "../../utils/global_func";
+import { getCurrDate, switchTab } from "../../utils/global_func";
 
 let tabList = getGlobalData("tabList");
 let drugs = ref(getGlobalData("drugs"));

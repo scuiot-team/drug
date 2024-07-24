@@ -118,7 +118,7 @@ var state = reactive({
   formChecked: "片",
   intervalText: "30分钟",
   intervalSelected: "00:30",
-  timeSelected: getCurrTime(),
+  timeSelected: getCurrTime(false),
   startDateSelected: getCurrDate(),
   stopDateSelected: getCurrDate(),
 });
