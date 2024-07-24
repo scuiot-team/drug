@@ -33,12 +33,6 @@ let paraName = params["name"];
 // 获取健康指标数据
 let paraData = getGlobalData("healthIndicators")[paraName];
 
-// 更新页面数据
-useDidShow((e) => {
-  console.log("fetch data again");
-  // TODO
-});
-
 function addRecord() {
   console.log("addRecord");
   Taro.navigateTo({

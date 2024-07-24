@@ -1,8 +1,8 @@
 <template>
   <View class="root">
-    <View class="success-text" v-if="!state.loading">
+    <!-- <View class="success-text" v-if="!state.loading">
       绑定成功：{{ state.result }}
-    </View>
+    </View> -->
   </View>
 </template>
 
@@ -17,6 +17,7 @@ import "./bind.sass";
 import Taro from "@tarojs/taro";
 import { setGlobalData, getGlobalData } from "../../utils/global_data";
 import { ref, reactive } from "vue";
+import { connect } from "../../utils/mqtt_req";
 
 // // 允许从相机和相册扫码
 // Taro.scanCode({
@@ -58,6 +59,16 @@ function onScanFunc() {
           // 扫码成功以后跳到签到成功页面、释放加载按钮
           state.loading = false;
           Taro.hideLoading();
+          setGlobalData("drug_id", data.result);
+          connect(); // 连接 mqtt
+          Taro.showToast({
+            title: "成功绑定到药箱",
+            icon: "success",
+            duration: 2000,
+          });
+          setTimeout(() => {
+            Taro.navigateBack();
+          }, 1000);
         }
       },
       fail: (err) => {

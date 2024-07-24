@@ -142,9 +142,8 @@ export function getUntokenDrugs(drugs: DrugData[], drugRecord: DrugRecord[]): [
     if (startstamp <= nowTime && nowTime <= stopstamp) {
       // 最新服药记录
       let latestStamp = startstamp; // 如果是第一次服药，则最新服药记录为开始服药时间
-      let latestRecord = classifiedDrugRecord[drug.id].slice(-1)[0];
-      if (latestRecord !== undefined) {
-        // 说明该药物有服药记录=不是第一次服药
+      if (classifiedDrugRecord[drug.id]) { // 说明该药物不是第一次服药
+        let latestRecord = classifiedDrugRecord[drug.id].slice(-1)[0];
         latestStamp = toTimeStamp(latestRecord.date, latestRecord.time);
       }
       // 找到下一个服药时间
@@ -210,10 +209,9 @@ export function getFutureDrugs(
     if (startstamp <= begStamp && begStamp <= stopstamp) {
       // 最新服药记录的时间（timestamp）
       let latestStamp = startstamp; // 如果是第一次服药，则最新服药记录为开始服药时间
-      let latestRecord = classifiedDrugRecord[drug.id].slice(-1)[0];
-      if (latestRecord !== undefined) {
-        // 说明该药物有服药记录=不是第一次服药
-        latestStamp = DrugRecord.getTime(latestRecord);
+      if (classifiedDrugRecord[drug.id]) { // 说明该药物不是第一次服药
+        let latestRecord = classifiedDrugRecord[drug.id].slice(-1)[0];
+        latestStamp = toTimeStamp(latestRecord.date, latestRecord.time);
       }
       // 找到大于begStamp的下一个服药时间
       let N = Math.ceil((begStamp - latestStamp) / interval);

@@ -233,7 +233,7 @@ let drugs = ref(getGlobalData("drugs"));
 let drugRecord = ref(getGlobalData("drugRecord"));
 // State参数
 let state = reactive({
-  timesUp: false,
+  timesUp: true,
   showSecondaryFabs: false,
   untokenDrugs: [],
   nextDrug: undefined,
@@ -276,6 +276,7 @@ function onTimeUp(params) {
 function toggleFloatBtn() {
   state.showSecondaryFabs = !state.showSecondaryFabs;
   console.log("connecting...");
+  console.log(drugRecord.value);
   connect();
   setTimeout(() => {
     subscribe("hello");
