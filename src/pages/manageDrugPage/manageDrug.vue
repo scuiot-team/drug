@@ -1,8 +1,8 @@
 <template>
-  <View>
+  <scroll-view class="root" scroll-y>
     <View class="headline"> 药物管理 </View>
     <View class="panel">
-      <View class="panel-title">所有药物</View>
+      <View class="panel-title">服药计划</View>
       <!-- v-for drug in drugs: -->
       <AtList v-for="(drug, index) in state.drugs" :key="index">
         <AtSwipeAction
@@ -20,7 +20,25 @@
       </AtList>
     </View>
     <View class="panel">
-      <View class="panel-title">服药信息</View>
+      <View class="panel-title">库存药物</View>
+      <View v-if="state.drugStock.length === 0" class="empty">
+        <image class="empty-img" src="../../images/icons/啥也没有.svg" />
+        <View class="empty-text">药盒还没有库存哦～</View>
+      </View>
+      <!-- 用AtCard循环 -->
+      <View v-else>
+        <AtCard
+          v-for="(drugInfo, index) in state.drugStock"
+          :key="index"
+          :title="drugInfo.name"
+          :thumb="drugInfo.otc ? otcUrl : RxUrl"
+          :extra="toDate(Number(drugInfo.time) * 1000) + '存入'"
+        >
+          用法用量：{{ drugInfo.use }}
+          <br />
+          功能主治：{{ drugInfo.func }}
+        </AtCard>
+      </View>
     </View>
     <AtButton
       class="save-btn"
@@ -30,7 +48,7 @@
     >
       确定
     </AtButton>
-  </View>
+  </scroll-view>
 </template>
 
 <script>
@@ -46,7 +64,9 @@ import "./manageDrug.sass";
 import { reactive, ref } from "vue";
 import { setGlobalData, getGlobalData } from "../../utils/global_data";
 import { getCurrDate, getCurrTime } from "../../utils/global_func";
-import { DrugData } from "../../utils/drugData";
+import { DrugInfo, DrugData } from "../../utils/drugData";
+import otcUrl from "../../images/icons/OTC.svg";
+import RxUrl from "../../images/icons/Rx.svg";
 
 // // 获取页面传入的参数
 // const params = Taro.getCurrentInstance().router.params;
@@ -56,6 +76,8 @@ import { DrugData } from "../../utils/drugData";
 var state = reactive({
   // 获取药物列表
   drugs: ref(getGlobalData("drugs")),
+  // 获取药物库存
+  drugStock: ref(getGlobalData("drugStock")),
   // 按钮右滑操作
   options: [
     {
@@ -73,11 +95,17 @@ var state = reactive({
   ],
 });
 
-function showDrugInfo(index) {}
+function showDrugInfo(index) {
+  // 展示药物信息 TODO
+}
 
 function onConfirm() {
   // save data
   Taro.navigateBack();
+}
+
+function toDate(timestamp) {
+  return new Date(timestamp).toLocaleDateString();
 }
 
 function onClickSwipe(index, params) {

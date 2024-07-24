@@ -1,3 +1,13 @@
+export class DrugInfo {
+  constructor(
+    public time: string,  // 存入时间
+    public name: string,  // 药品名称
+    public use: string,   // 用法用量
+    public func: string,  // 功能主治
+    public otc: boolean,  // 是否OTC
+  ) {}
+}
+
 export class DrugData {
   constructor(
     public id: string,        // 唯一标识   // 先用TimeStamp代替

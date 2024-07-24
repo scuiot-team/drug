@@ -1,5 +1,5 @@
 import PatientInfo from "./patientInfo"
-import { DrugData, DrugRecord } from "./drugData";
+import { DrugInfo, DrugData, DrugRecord } from "./drugData";
 
 let globalData = {
   box_id: "",
@@ -27,6 +27,11 @@ let globalData = {
     new PatientInfo(
       '老明', 90, '男', '19436563675', 'https://b0.bdstatic.com/0df6c8c7f109aa7b67e7cb15e6f8d025.jpg@h_1280', '子孙', '糖尿病', '否', '暂无', '良好', 162, 52, 100, 99, 100, 73, '胰岛素增敏剂'
     ),
+  ],
+  // 药盒库存
+  drugStock: [
+    new DrugInfo("1721804283", "毛果芸香碱滴眼液", "一次1滴，一日1～4次", "慢性青光眼、闭角型青光眼", false),
+    new DrugInfo("1721804283", "布洛芬胶囊", "一次1粒，一日3～4次", "缓解类风湿关节炎和骨关节炎、解热镇痛", true),
   ],
   // 用药记录
   drugRecord: [
@@ -60,7 +65,7 @@ let globalData = {
     // new DrugRecord("1720656004", "胰岛素", "1", "滴", "静脉注射", "2024-07-23", "08:00:00", false),
     // new DrugRecord("1720656001", "山莨菪碱", "2", "片", "口服", "2024-07-23", "08:30:00", false),
   ],
-  // 药物数据
+  // 用药计划
   drugs: [
     // 阿司匹林 每隔12小时1片，从 2024-07-11 08:00:00 起，至 2024-10-10 结束
     new DrugData('1720656000', '阿司匹林', '1', '片', '口服', '12:00:00', '08:00:00', '2024-07-20', '2024-10-10'),

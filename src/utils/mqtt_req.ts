@@ -1,9 +1,12 @@
 import mqtt from "./mqtt.min.js";
+import { ref } from "vue";
+import { DrugInfo } from "./drugData";
 import { getGlobalData } from "./global_data";
 import { genRandStr } from "./global_func";
 import Taro from "@tarojs/taro";
 
 let host = getGlobalData('MQTTurl');
+let drugStock = ref(getGlobalData('drugStock'));
 let client: any = null; // 初始化MQTT client
 
 const mqttOptions = {
@@ -26,15 +29,24 @@ export function connect() {
     client = mqtt.connect(`wxs://${host}:8084/mqtt`, mqttOptions);
     client.on("connect", () => {
       // 连接成功后，订阅主题
-      Taro.showToast({
-        title: "连接成功",
-      });
-      console.log("链接成功");
+      // Taro.showToast({
+      //   icon: "success",
+      //   title: "连接成功",
+      // });
+      console.log("成功链接到MQTT服务器");
       // 订阅老人跌倒事件
       let drug_id = getGlobalData('drug_id');
-      client.subscribe(`drug/${drug_id}/slip`);
-      console.log(`成功订阅主题：drug/${drug_id}/slip`);
-      client.on("message", (topic: string, payload: string|any) => {
+      if (drug_id) {
+        subscribe(`drug/${drug_id}/slip`);
+        subscribe(`drug/${drug_id}/adddrug`);
+      } else {
+        console.log("未绑定药盒");
+        Taro.showModal({
+          content: "监测到还未绑定药盒，请到设置里绑定！",
+          showCancel: false,
+        });
+      }
+      client.on("message", (topic: string, payload: string | any) => {
         payload = payload.toString();
         try {
           payload = JSON.parse(payload);
@@ -49,6 +61,24 @@ export function connect() {
               content: payload.message,
               showCancel: false,
             });
+          }
+        }
+        if (topic === `drug/${drug_id}/adddrug`) {
+          if (payload.code === 200) {
+            let druginfo = payload.druginfo;
+            if (druginfo) {
+              drugStock.value.push(new DrugInfo(
+                String(payload.timestamp),
+                druginfo.name,  // 药品名称
+                druginfo.use,   // 用法用量
+                druginfo.func,  // 功能主治
+                druginfo.otc,   // 是否OTC
+              ));
+              Taro.showModal({
+                content: `${payload.message}：${payload.druginfo.name}`,
+                showCancel: false,
+              });
+            }
           }
         }
       });

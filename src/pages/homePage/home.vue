@@ -233,7 +233,7 @@ let drugs = ref(getGlobalData("drugs"));
 let drugRecord = ref(getGlobalData("drugRecord"));
 // State参数
 let state = reactive({
-  timesUp: true,
+  timesUp: false,
   showSecondaryFabs: false,
   untokenDrugs: [],
   nextDrug: undefined,
@@ -275,12 +275,6 @@ function onTimeUp(params) {
 
 function toggleFloatBtn() {
   state.showSecondaryFabs = !state.showSecondaryFabs;
-  console.log("connecting...");
-  console.log(drugRecord.value);
-  connect();
-  setTimeout(() => {
-    subscribe("hello");
-  }, 5000);
 }
 
 function updateToNext() {
@@ -326,4 +320,6 @@ function untokenDone(skip = false) {
 
 // 初始化
 updateToNext();
+// MQTT
+connect();
 </script>
