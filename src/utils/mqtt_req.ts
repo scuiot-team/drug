@@ -11,7 +11,7 @@ let healthIndicators = ref(getGlobalData('healthIndicators'));
 let client: any = null; // 初始化MQTT client
 
 const mqttOptions = {
-  keepalive: 30,
+  keepalive: 60,
   protocolVersion: 4, // MQTT V3.1.1
   connectTimeout: 4000,
   clientId: 'wechat_' + genRandStr(6),
@@ -50,6 +50,7 @@ export function connect() {
         });
       }
       client.on("message", (topic: string, payload: string | any) => {
+        drug_id = getGlobalData('drug_id'); // 更新药盒ID
         payload = payload.toString();
         try {
           payload = JSON.parse(payload);

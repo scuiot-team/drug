@@ -17,7 +17,7 @@ import "./bind.sass";
 import Taro from "@tarojs/taro";
 import { setGlobalData, getGlobalData } from "../../utils/global_data";
 import { ref, reactive } from "vue";
-import { connect } from "../../utils/mqtt_req";
+import { connect, subscribe } from "../../utils/mqtt_req";
 
 // // 允许从相机和相册扫码
 // Taro.scanCode({
@@ -60,7 +60,11 @@ function onScanFunc() {
           state.loading = false;
           Taro.hideLoading();
           setGlobalData("drug_id", data.result);
-          connect(); // 连接 mqtt
+          // MQTT已连接，直接订阅主题
+          subscribe(`drug/${data.result}/slip`);
+          subscribe(`drug/${data.result}/adddrug`);
+          subscribe(`drug/${data.result}/heartrate`);
+          subscribe(`drug/${data.result}/spo2`);
           Taro.showToast({
             title: "成功绑定到药箱",
             icon: "success",

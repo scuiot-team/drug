@@ -322,7 +322,7 @@ function untokenDone(skip = false) {
 "${tmp.dose}", \
 "${tmp.date}", \
 "${tmp.time}", \
-"${skip}")`);
+${skip})`);
   drugRecord.value.push(tmp);
   updateToNext();
 }
