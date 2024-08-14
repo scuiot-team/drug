@@ -1,5 +1,5 @@
 <template>
-  <View class="root">
+  <View class="root-bind">
     <!-- <View class="success-text" v-if="!state.loading">
       绑定成功：{{ state.result }}
     </View> -->
@@ -17,22 +17,17 @@ import "./bind.sass";
 import Taro from "@tarojs/taro";
 import { setGlobalData, getGlobalData } from "../../utils/global_data";
 import { ref, reactive } from "vue";
-import { connect, subscribe } from "../../utils/mqtt_req";
+import { subscribe, unsubscribe } from "../../utils/mqtt_req";
 
-// // 允许从相机和相册扫码
-// Taro.scanCode({
-//   success: (res) => {
-//     console.log(res);
-//   },
-// });
+function subscribeToDrugTopics(box_id) {
+  const topics = ["slip", "adddrug", "heartrate", "spo2"];
+  topics.forEach((topic) => subscribe(`drug/${box_id}/${topic}`));
+}
 
-// // 只允许从相机扫码
-// Taro.scanCode({
-//   onlyFromCamera: true,
-//   success: (res) => {
-//     console.log(res);
-//   },
-// });
+function unsubscribeDrugTopics(box_id) {
+  const topics = ["slip", "adddrug", "heartrate", "spo2"];
+  topics.forEach((topic) => unsubscribe(`drug/${box_id}/${topic}`));
+}
 
 var state = reactive({
   result: "",
@@ -59,12 +54,15 @@ function onScanFunc() {
           // 扫码成功以后跳到签到成功页面、释放加载按钮
           state.loading = false;
           Taro.hideLoading();
-          setGlobalData("drug_id", data.result);
-          // MQTT已连接，直接订阅主题
-          subscribe(`drug/${data.result}/slip`);
-          subscribe(`drug/${data.result}/adddrug`);
-          subscribe(`drug/${data.result}/heartrate`);
-          subscribe(`drug/${data.result}/spo2`);
+          // 如果之前绑定过药箱，取消订阅
+          let old_box_id = getGlobalData("box_id");
+          if (old_box_id) {
+            unsubscribeDrugTopics(old_box_id);
+            setGlobalData("subscribed", false);
+          }
+          // 订阅新药箱
+          setGlobalData("box_id", data.result);
+          subscribeToDrugTopics(data.result);
           Taro.showToast({
             title: "成功绑定到药箱",
             icon: "success",

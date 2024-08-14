@@ -1,5 +1,5 @@
 <template>
-  <View class="root">
+  <View class="root-patients">
     <scroll-view class="scrollview" scroll-y>
       <View class="scrollbody">
         <View class="card" v-for="(item, index) in patients" :key="index">
@@ -11,47 +11,40 @@
           <View class="info">
             <text class="name">{{ item.name }}</text>
             <View class="icon-text">
-              <image
-                :src="phoneIconUrl"
-                style="width: 40rpx; height: 40rpx; margin-right: 10rpx"
-              ></image>
-              <text>{{ item.phone }}</text>
+              <image class="info-icon" :src="phoneIconUrl"></image>
+              <text class="info-text">{{ item.phone }}</text>
             </View>
             <View class="icon-text">
-              <image
-                :src="diseaseIconUrl"
-                style="width: 40rpx; height: 40rpx; margin-right: 10rpx"
-              ></image>
-              <text>{{ item.illness }}</text>
+              <image class="info-icon" :src="diseaseIconUrl"></image>
+              <text class="info-text">{{ item.illness }}</text>
             </View>
-            <AtIcon
-              class="icon"
-              value="user"
-              color="#1E90FF"
-              style="right: 170rpx"
-              @click="
-                navigateTo('/pages/patientInfoPage/patientInfo?id=', index)
-              "
-            ></AtIcon>
-            <AtIcon
-              class="icon"
-              value="trash"
-              color="#CD2626"
-              style="right: 100rpx"
-              @click="deletePatient(index)"
-            ></AtIcon>
-            <AtIcon
-              class="icon"
-              value="settings"
-              color="#363636"
-              style="right: 30rpx"
-              @click="
-                navigateTo(
-                  '/pages/editPatientInfoPage/editPatientInfo?id=',
-                  index
-                )
-              "
-            ></AtIcon>
+            <View class="button-list">
+              <AtIcon
+                class="icon"
+                value="user"
+                color="#1E90FF"
+                @click="
+                  navigateTo('/pages/patientInfoPage/patientInfo?id=', index)
+                "
+              ></AtIcon>
+              <AtIcon
+                class="icon"
+                value="trash"
+                color="#CD2626"
+                @click="deletePatient(index)"
+              ></AtIcon>
+              <AtIcon
+                class="icon"
+                value="settings"
+                color="#363636"
+                @click="
+                  navigateTo(
+                    '/pages/editPatientInfoPage/editPatientInfo?id=',
+                    index
+                  )
+                "
+              ></AtIcon>
+            </View>
           </View>
         </View>
       </View>
@@ -89,6 +82,7 @@ useDidShow((e) => {
   isLogin = getGlobalData("userInfo").isLogin;
   patients.value = getGlobalData("patients");
 });
+
 function navigateTo(url, params) {
   // 检查是否登录
   if (isLogin) {
@@ -109,6 +103,7 @@ function navigateTo(url, params) {
     });
   }
 }
+
 function deletePatient(e) {
   Taro.showModal({
     title: "提示",

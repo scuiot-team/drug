@@ -2,13 +2,26 @@
 @import "taro-ui-vue3/dist/style/index.scss";
 
 // 全局输入框 文本
-.at-input__input{
+.at-input__input {
   text-align: right;
   margin-right: 30px;
 }
 
+// 卡片阴影
+.at-card {
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+// H5 隐藏TabBar
+.taro-tabbar__tabbar.taro-tabbar__tabbar-bottom {
+  display: none;
+  visibility: hidden;
+}
+
 // 这里是全局样式
 .headline {
+  display: block;
   padding-left: 30px;
   padding-bottom: 20px;
   font-size: 35px;
@@ -29,6 +42,7 @@
 }
 
 .panel-title {
+  display: block;
   position: relative;
   margin-bottom: 16px;
   margin-top: 16px;

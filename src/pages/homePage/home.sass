@@ -1,7 +1,8 @@
 .health-info-cards
-  padding-bottom: 400rpx
+  padding-bottom: 400px
   .card-container
-    padding-bottom: 20rpx
+    display: block
+    padding-bottom: 20px
 
     .no-data-text
       display: inline-block
@@ -22,6 +23,7 @@
       color: grey
 
 .countdown-container
+  display: block
   width: 100%
   text-align: center
 
@@ -42,6 +44,7 @@
     margin-bottom: 20px
 
 .alarm-container
+  display: block
   text-align: center
 
   .tags
@@ -61,8 +64,8 @@
   width: 100%
   z-index: 998
   background: linear-gradient(to bottom, #ffffffff, #5d89ed63)
-  -webkit-backdrop-filter: blur(10rpx)
-  backdrop-filter: blur(10rpx)
+  -webkit-backdrop-filter: blur(10px)
+  backdrop-filter: blur(10px)
   text-align: center
 
   &.warning
@@ -70,39 +73,49 @@
     z-index: 999
 
   .prompt
+    display: block
     color: #5a5a5a
 
   .drug-info-container
+    display: block
     margin-top: 40%
 
     .drug-name
+      display: block
       font-size: xx-large
       color: #1e1e1e
       font-weight: bold
 
     .drug-dose
-      margin-top: 20rpx
+      display: inline-block
+      margin-top: 20px
       color: #4faf70
       font-size: large
 
     .drug-form
+      display: inline-block
+      margin-left: 20px
       color: #da4f7a
       font-size: large
 
   .btn-container
     z-index: 1000
-    width: 60%
     margin-left: auto
     margin-right: auto
-    margin-top: 50rpx
+    margin-top: 50px
 
     .done-btn
-      margin-top: 20rpx
+      margin-left: 20%
+      margin-right: 20%
+      margin-top: 20px
       background-color: transparent
 
     .skip-btn
+      margin-left: 20%
+      margin-right: 20%
       background-color: transparent
 
   .drug-date
-    margin-top: 50rpx
+    display: block
+    margin-top: 50px
     color: #e53f73

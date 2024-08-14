@@ -1,5 +1,5 @@
 <template>
-  <View class="root">
+  <View class="root-chat">
     <View class="container">
       <View class="fixed-top">
         <AtInput

@@ -1,22 +1,23 @@
-.root // 全局页面样式
+.root-chat // 全局页面样式
   background-color: #ededed // 灰色背景
 
 .container // 对话页面（不包括底部Tab栏）
   display: flex
   flex-direction: column
   height: 100vh
-  padding-bottom: 400rpx
+  padding-bottom: 400px
+  background-color: #ededed // 灰色背景
 
   .fixed-bottom // 用于固定在底部的输入框
     position: fixed
-    bottom: 170rpx
-    height: 120rpx
+    bottom: 170px
+    height: 120px
     width: 100%
     background-color: #fff
 
   .fixed-top // 顶部的输入框
     top: 0
-    height: 120rpx
+    height: 120px
     width: 100%
     background: linear-gradient(to bottom, #FFF, #ededed)
 
@@ -24,19 +25,19 @@
       background-color: rgba(255,255,255,0.2)
 
   .wechat-content // 拟微信对话内容
-    padding: 22rpx
-    padding-bottom: 400rpx
+    padding: 22px
+    padding-bottom: 400px
 
     .wechat-dialog
-      margin-bottom: 31.25rpx
+      margin-bottom: 31.25px
       position: relative
       display: flex
 
       .wechat-dialog-face // 头像
-        width: 76.875rpx
-        height: 76.875rpx
+        width: 76.875px
+        height: 76.875px
         background: #f1f1f1
-        border-radius: 9.375rpx
+        border-radius: 9.375px
         background-size: contain
         background-repeat: no-repeat
         position: absolute
@@ -48,30 +49,30 @@
 
       .avatar // 头像图片
         display: block
-        width: 76.875rpx
-        height: 76.875rpx
+        width: 76.875px
+        height: 76.875px
 
       .wechat-dialog-text // 对话框
         background: #fff
-        padding: 17.5rpx 23.75rpx
-        font-size: 30rpx
-        border-radius: 9.375rpx
-        margin-right: 87.5rpx
+        padding: 17.5px 23.75px
+        font-size: 30px
+        border-radius: 9.375px
+        margin-right: 87.5px
         word-break: break-all
-        margin-left: 100rpx
+        margin-left: 100px
         display: inline-block
         position: relative
         line-height: normal
-        min-height: 40rpx
+        min-height: 40px
 
         &:after
           content: ""
           background: #fff
-          width: 15rpx
-          height: 15rpx
-          border-bottom-left-radius: 2.5rpx
-          top: 31.25rpx
-          left: -7.5rpx
+          width: 15px
+          height: 15px
+          border-bottom-left-radius: 2.5px
+          top: 31.25px
+          left: -7.5px
           position: absolute
           transform: rotate(45deg)
 
@@ -94,14 +95,14 @@
 
       .wechat-dialog-text // 自己对话框
         background: #98e970
-        margin-left: 87.5rpx
-        margin-right: 100rpx
+        margin-left: 87.5px
+        margin-right: 100px
 
         &:after
           background: #98e970
           left: auto
-          right: -6.25rpx
-          border-top-right-radius: 2.5rpx
+          right: -6.25px
+          border-top-right-radius: 2.5px
           border-bottom-left-radius: 0
 
 .at-input__input

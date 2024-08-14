@@ -1,5 +1,5 @@
 <template>
-  <View class="root">
+  <View class="root-self">
     <View class="user">
       <AtAvatar
         :image="userInfo.avatar"

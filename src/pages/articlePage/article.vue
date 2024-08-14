@@ -1,5 +1,5 @@
 <template>
-  <scroll-view class="root" scroll-y>
+  <scroll-view class="root-article" scroll-y>
     <View v-if="title === '用户协议'">
       <View class="headline"> 用户协议 </View>
     </View>

@@ -1,5 +1,5 @@
 <template>
-  <View class="root">
+  <View class="root-sos">
     <View class="headline">设置紧急联系人号码</View>
     <AtInput
       class="input"

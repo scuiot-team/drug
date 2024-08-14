@@ -1,5 +1,5 @@
 <template>
-  <View>
+  <View class="root-para2">
     <View class="headline">{{ paraTitle }}</View>
     <AtFab class="add-record-btn" :onClick="addRecord">
       <Text className="at-fab__icon at-icon at-icon-add"></Text>
@@ -28,8 +28,8 @@ const canvas = ref(null);
 // 获取页面传入的参数
 const params = Taro.getCurrentInstance().router.params;
 // 获取健康指标名称
-let paraTitle = params["title"];
-let paraName = params["name"];
+const paraTitle = decodeURIComponent(params["title"]);
+const paraName = decodeURIComponent(params["name"]);
 // 获取健康指标数据
 let paraData = getGlobalData("healthIndicators")[paraName];
 

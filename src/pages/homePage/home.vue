@@ -1,5 +1,5 @@
 <template>
-  <View>
+  <View class="root-home">
     <!-- 如果还有药物没有服用，则出示该弹窗 -->
     <View v-if="state.untokenDrugs.length !== 0" class="time-up-cover warning">
       <View class="prompt">

@@ -1,5 +1,5 @@
 <template>
-  <View>
+  <View class="root-statistics">
     <AtCalendar :currentDate="state.currDate" :onDayClick="switchDay" />
     <!-- <AtDivider :content="state.currDate" /> -->
     <View class="panel-title">服药进度 ({{ state.currDate }})</View>

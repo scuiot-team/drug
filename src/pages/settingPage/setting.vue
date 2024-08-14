@@ -1,5 +1,5 @@
 <template>
-  <View class="root">
+  <View class="root-setting">
     <AtList class="menu" :hasBorder="false">
       <AtListItem
         class="item"

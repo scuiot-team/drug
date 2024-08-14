@@ -1,5 +1,5 @@
 <template>
-  <scroll-view class="root" scroll-y>
+  <scroll-view class="root-managedrug" scroll-y>
     <View class="headline"> 药物管理 </View>
     <View class="panel">
       <View class="panel-title">服药计划</View>

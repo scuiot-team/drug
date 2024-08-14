@@ -1,5 +1,5 @@
 <template>
-  <View class="root">
+  <View class="root-addrecord2">
     <View class="headline"> 添加{{ paraTitle }}记录 </View>
     <AtForm>
       <AtInput
@@ -54,8 +54,8 @@ import { getCurrTime, getCurrDate } from "../../utils/global_func";
 const params = Taro.getCurrentInstance().router.params;
 console.log(params);
 // 获取健康指标名称
-const paraTitle = params["title"];
-const paraName = params["name"];
+const paraTitle = decodeURIComponent(params["title"]);
+const paraName = decodeURIComponent(params["name"]);
 // 获取当前时间
 var currTime = ref(`${getCurrDate()}T${getCurrTime()}`);
 // 2个参数（舒张压、收缩压）

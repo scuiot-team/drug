@@ -1,5 +1,5 @@
 <template>
-  <View class="root">
+  <View class="root-editpatientinfo">
     <View class="headline"> 编辑监护对象信息 </View>
     <View class="panel">
       <View class="panel-title"> 基本信息 </View>

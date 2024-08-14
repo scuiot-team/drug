@@ -1,5 +1,5 @@
 <template>
-  <scroll-view class="root" scroll-y>
+  <scroll-view class="root-patientinfo" scroll-y>
     <View class="headline">{{ patientInfo.name }}</View>
     <AtDivider content="最近一次测量数据" />
     <AtGrid class="grid" :data="data" />

@@ -11,7 +11,7 @@ let healthIndicators = ref(getGlobalData('healthIndicators'));
 let client: any = null; // 初始化MQTT client
 
 const mqttOptions = {
-  keepalive: 60,
+  keepalive: 10,
   protocolVersion: 4, // MQTT V3.1.1
   connectTimeout: 4000,
   clientId: 'wechat_' + genRandStr(6),
@@ -29,20 +29,9 @@ export function connect() {
     console.log("连接中...");
     client = mqtt.connect(`wxs://${host}:8084/mqtt`, mqttOptions);
     client.on("connect", () => {
-      // 连接成功后，订阅主题
-      // Taro.showToast({
-      //   icon: "success",
-      //   title: "连接成功",
-      // });
       console.log("成功链接到MQTT服务器");
-      // 订阅老人跌倒事件
-      let drug_id = getGlobalData('drug_id');
-      if (drug_id) {
-        subscribe(`drug/${drug_id}/slip`);
-        subscribe(`drug/${drug_id}/adddrug`);
-        subscribe(`drug/${drug_id}/heartrate`);
-        subscribe(`drug/${drug_id}/spo2`);
-      } else {
+      let box_id = getGlobalData('box_id');
+      if (!box_id) {
         console.log("未绑定药盒");
         Taro.showModal({
           content: "监测到还未绑定药盒，请到设置里绑定！",
@@ -50,7 +39,7 @@ export function connect() {
         });
       }
       client.on("message", (topic: string, payload: string | any) => {
-        drug_id = getGlobalData('drug_id'); // 更新药盒ID
+        box_id = getGlobalData('box_id'); // 更新药盒ID
         payload = payload.toString();
         try {
           payload = JSON.parse(payload);
@@ -59,7 +48,7 @@ export function connect() {
           return;
         }
         console.log("recieve message:", payload, "from topic:", topic);
-        if (topic === `drug/${drug_id}/slip`) {
+        if (topic === `drug/${box_id}/slip`) {
           if (payload.code === 400) {
             Taro.showModal({
               content: payload.message,
@@ -67,7 +56,7 @@ export function connect() {
             });
           }
         }
-        if (topic === `drug/${drug_id}/adddrug`) {
+        if (topic === `drug/${box_id}/adddrug`) {
           if (payload.code === 200) {
             let druginfo = payload.druginfo;
             if (druginfo) {
@@ -85,7 +74,7 @@ export function connect() {
             }
           }
         }
-        if (topic === `drug/${drug_id}/heartrate`) {
+        if (topic === `drug/${box_id}/heartrate`) {
           payload.timestamp = payload.timestamp * 1000;
           if (payload.code === 200) {
             healthIndicators.value.heartRateData.push({
@@ -100,7 +89,7 @@ export function connect() {
             });
           }
         }
-        if (topic === `drug/${drug_id}/spo2`) {
+        if (topic === `drug/${box_id}/spo2`) {
           payload.timestamp = payload.timestamp * 1000;
           if (payload.code === 200) {
             healthIndicators.value.bloodOxygenData.push({
@@ -139,10 +128,6 @@ export function subscribe(subTopic: string) {
   if (client) {
     client.subscribe(subTopic);
     console.log(`成功订阅主题：${subTopic}`);
-    // Taro.showModal({
-    //   content: `成功订阅主题：${subTopic}`,
-    //   showCancel: false,
-    // });
     return;
   }
   console.log("Client is null");
@@ -150,11 +135,8 @@ export function subscribe(subTopic: string) {
 
 export function unsubscribe(subTopic: string) {
   if (client) {
-    client.unsubscribe(subTopic)
-    // Taro.showModal({
-    //   content: `成功取消订阅主题：${subTopic}`,
-    //   showCancel: false,
-    // });
+    client.unsubscribe(subTopic);
+    console.log(`取消订阅主题：${subTopic}`);
     return;
   }
   console.log("Client is null");

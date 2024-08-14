@@ -1,5 +1,5 @@
 <template>
-  <View>
+  <View class="root-editdrug">
     <View class="headline"> 编辑药物 </View>
     <View class="panel">
       <View class="panel-title">药物信息</View>

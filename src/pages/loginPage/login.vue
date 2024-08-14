@@ -1,5 +1,5 @@
 <template>
-  <View class="body">
+  <View class="root-login">
     <AtInput
       class="input"
       placeholderClass="placeholder"
