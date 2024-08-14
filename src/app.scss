@@ -13,6 +13,13 @@
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 }
 
+.menu {
+  width: 92%;
+  border-radius: 20px;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.10);
+  padding: 20px 0;
+}
+
 // H5 隐藏TabBar
 .taro-tabbar__tabbar.taro-tabbar__tabbar-bottom {
   display: none;

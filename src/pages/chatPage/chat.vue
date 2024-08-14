@@ -118,7 +118,12 @@ const state = reactive({
 function onMsgChange(text) {
   state.rawText = text;
   state.iconDisabled = text.trim() === "";
-  console.log(state.rawText, state.iconDisabled);
+}
+
+function decodeAarryBuffer(arrayBuffer) {
+  const uint8Array = new Uint8Array(arrayBuffer);
+  const text = new TextDecoder("utf-8").decode(uint8Array);
+  return text;
 }
 
 function getRespFromAI(mesg) {
@@ -141,40 +146,34 @@ function getRespFromAI(mesg) {
         messages: mesg,
       },
       success: (res) => {
-        console.log("All data received successfully, result:", res);
+        console.log("All data received successfully");
+        state.respondingText += decodeAarryBuffer(res.data);
       },
       fail: (err) => {
         console.log("Request failed", err);
       },
       complete: () => {
-        const newMessage = {
-          role: "assistant",
-          content: state.respondingText,
-        };
-
-        state.respondingText = "";
-        state.isResponding = false;
-        state.isLoading = false;
-        state.messages = state.messages.concat(newMessage);
+        console.log("Request complete");
       },
     });
+
+    requestTask.then((res) => {
+      state.respondingText += decodeAarryBuffer(res.data);
+
+      const newMessage = {
+        role: "assistant",
+        content: state.respondingText,
+      };
+
+      state.respondingText = "";
+      state.isResponding = false;
+      state.isLoading = false;
+      state.messages = state.messages.concat(newMessage);
+    });
+
     requestTask.onChunkReceived((res) => {
-      // 方法1
-      const arrayBuffer = res.data;
-      const uint8Array = new Uint8Array(arrayBuffer);
-      const text = new TextDecoder("utf-8").decode(uint8Array);
-
-      // 方法2
-      // const arrayBuffer = res.data;
-      // const uint8Array = new Uint8Array(arrayBuffer);
-      // let text = String.fromCharCode.apply(null, uint8Array);
-
-      // 方法3
-      // const data16 = buf2hex(res.data);
-      // const text = hexToStr(data16);
       state.isResponding = true;
-      state.respondingText += text;
-      // console.log(state.respondingText);
+      state.respondingText += decodeAarryBuffer(res.data);
     });
   } catch (error) {
     console.error("Error:", error);
