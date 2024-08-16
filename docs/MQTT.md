@@ -116,3 +116,17 @@
 
 - 弹窗提醒（消息就是message里的内容）
 - 将 spo2 加入患者血氧数据
+
+## 传给药盒要服用的药物
+
+#### 小程序端
+
+发布下面的plain text到主题：`drug/id/nextdrug`
+
+```text
+药物名称
+```
+
+#### 设备端
+
+监听主题：`drug/id/nextdrug`

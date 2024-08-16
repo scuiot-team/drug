@@ -178,6 +178,7 @@ function onIntervalChange(e) {
   }
   interval += `${minute}分钟`;
   state.intervalText = interval;
+  state.intervalSelected = e.detail.value;
 }
 
 function onDrugNameChange(e) {

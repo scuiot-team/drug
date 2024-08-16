@@ -1,36 +1,19 @@
 <template>
   <View class="root-home">
-    <!-- 如果还有药物没有服用，则出示该弹窗 -->
-    <View v-if="state.untokenDrugs.length !== 0" class="time-up-cover warning">
-      <View class="prompt">
-        您还有 {{ state.untokenDrugs.length }} 个药物还没有服用
-      </View>
-      <View class="drug-info-container">
-        <View class="drug-name">{{ state.untokenDrugs[0].drugName }}</View>
-        <View class="drug-dose">{{ state.untokenDrugs[0].dose }}</View>
-        <View class="drug-form">
-          {{ state.untokenDrugs[0].dosage }}
-          {{ state.untokenDrugs[0].form }}
-        </View>
-      </View>
-      <View class="btn-container">
-        <AtButton class="skip-btn" @click="untokenDone(true)" type="secondary">
-          忽略提醒
-        </AtButton>
-        <AtButton class="done-btn" @click="untokenDone(false)" type="secondary">
-          已服药
-        </AtButton>
-      </View>
-      <View class="drug-date">
-        该药应于
-        {{ state.untokenDrugs[0].date }}
-        {{ state.untokenDrugs[0].time }}
-        服用
-      </View>
+    <View v-if="state.untokenDrugs.length !== 0">
+      <AtNoticebar
+        single
+        showMore
+        moreText="查看详情"
+        icon="bell"
+        :onGotoMore="navigateToUntokens"
+      >
+        {{ state.untokenDrugs.length }} 个药物还没有服用
+      </AtNoticebar>
     </View>
     <!-- 没有未服用药物后才可能显示 服用界面 -->
     <View
-      v-else-if="state.timesUp && state.nextDrug !== undefined"
+      v-if="state.timesUp && state.nextDrug !== undefined"
       class="time-up-cover"
     >
       <View class="prompt">请服用下面药物</View>
@@ -57,6 +40,7 @@
         <AtCountdown
           isCard
           isShowDay
+          :key="state.clock.seconds"
           :day="state.clock.day"
           :hours="state.clock.hours"
           :minutes="state.clock.minutes"
@@ -226,7 +210,7 @@ import weightUrl from "../../images/icons/weight.svg";
 import heartrateUrl from "../../images/icons/heartrate.svg";
 import paO2Url from "../../images/icons/paO2.svg";
 // MQTT req
-import { connect, subscribe } from "../../utils/mqtt_req";
+import { connect, subscribe, publish } from "../../utils/mqtt_req";
 
 // 获取健康指标数据
 let drugs = ref(getGlobalData("drugs"));
@@ -264,6 +248,10 @@ function navigateTo(url) {
   Taro.navigateTo({ url: url });
 }
 
+function navigateToUntokens() {
+  navigateTo("../untokensPage/untokens");
+}
+
 function onTimeUp(params) {
   // Taro.showToast({
   //   title: "大郎，该吃药了～",
@@ -271,6 +259,11 @@ function onTimeUp(params) {
   //   duration: 2000,
   // });
   state.timesUp = true;
+  let box_id = getGlobalData("box_id");
+  if (box_id) {
+    console.log("publishing to nextdrug.");
+    publish(`drug/${box_id}/nextdrug`, state.nextDrug.drugName);
+  }
 }
 
 function toggleFloatBtn() {
@@ -331,4 +324,10 @@ ${skip})`);
 updateToNext();
 // MQTT
 connect();
+
+setInterval(() => {
+  console.log("更新数据");
+  updateToNext();
+  connect();
+}, 5000);
 </script>

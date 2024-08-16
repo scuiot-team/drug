@@ -1,7 +1,7 @@
 import mqtt from "./mqtt.min.js";
 import { ref } from "vue";
 import { DrugInfo } from "./drugData";
-import { getGlobalData } from "./global_data";
+import { getGlobalData, setGlobalData } from "./global_data";
 import { genRandStr, getTime, getDate } from "./global_func";
 import Taro from "@tarojs/taro";
 
@@ -26,10 +26,15 @@ export function connect() {
   // 因此不要忘了带上这个 /mqtt !!!
   // 微信小程序中需要将 wss 协议写为 wxs，且由于微信小程序出于安全限制，不支持 ws 协议
   try {
+    if (getGlobalData('mqttConnected')) {
+        console.log("MQTT已连接");
+        return;
+    }
     console.log("连接中...");
     client = mqtt.connect(`wxs://${host}:8084/mqtt`, mqttOptions);
     client.on("connect", () => {
       console.log("成功链接到MQTT服务器");
+      setGlobalData('mqttConnected', true);
       let box_id = getGlobalData('box_id');
       if (!box_id) {
         console.log("未绑定药盒");

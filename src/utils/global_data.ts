@@ -3,6 +3,7 @@ import { DrugInfo, DrugData, DrugRecord } from "./drugData";
 
 let globalData = {
   box_id: "",
+  mqttConnected: false,
   MQTTurl: "i7148e41.ala.us-east-1.emqxsl.com",
   // 底部Tab栏
   tabList: [

@@ -5,7 +5,7 @@ export class DrugInfo {
     public use: string,   // 用法用量
     public func: string,  // 功能主治
     public otc: boolean,  // 是否OTC
-  ) {}
+  ) { }
 }
 
 export class DrugData {
@@ -172,7 +172,6 @@ export function getUntokenDrugs(drugs: DrugData[], drugRecord: DrugRecord[]): [
             false
           )
         );
-        // console.log("pushed:", result[result.length - 1]);
       }
       // 此时 latestStamp > nowTime
       let tmp = result.pop(); // result 的最后一个值舍去

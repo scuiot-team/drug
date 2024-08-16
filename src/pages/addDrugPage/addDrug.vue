@@ -164,6 +164,7 @@ function onIntervalChange(e) {
     minute = minute[1];
   }
   interval += `${minute}分钟`;
+  state.intervalSelected = e.detail.value;
   state.intervalText = interval;
 }
 
@@ -183,18 +184,42 @@ function onDosageChange(e) {
 }
 
 function addDrug(params) {
+  if (state.drugName == "") {
+    Taro.showToast({
+      title: "名称不能为空",
+      icon: "none",
+      duration: 1000,
+    });
+    return;
+  }
+  if (state.dosage == "") {
+    Taro.showToast({
+      title: "剂量不能为空",
+      icon: "none",
+      duration: 1000,
+    });
+    return;
+  }
   let drug = new DrugData(
-    Date.now(), // 唯一标识
+    String(Date.now()), // 唯一标识
     state.drugName, // 药品名称
     state.dosage, // 给药剂量
     state.formChecked, // 药物剂型
     state.doseChecked, // 给药方式
-    state.intervalSelected, // 给药间隔
-    state.timeSelected, // 初次给药
+    state.intervalSelected + ":00", // 给药间隔
+    state.timeSelected + ":00", // 初次给药
     state.startDateSelected, // 开始日期
     state.stopDateSelected // 结束日期
   );
   drugs.value.push(drug);
   console.log(drugs.value);
+  Taro.showToast({
+    title: "添加成功",
+    icon: "success",
+    duration: 1000,
+  });
+  setTimeout(() => {
+    Taro.navigateBack();
+  }, 500);
 }
 </script>
