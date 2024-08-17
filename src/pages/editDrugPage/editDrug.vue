@@ -1,25 +1,29 @@
 <template>
-  <View class="root-editdrug">
-    <View class="headline"> 编辑药物 </View>
-    <View class="panel">
-      <View class="panel-title">药物信息</View>
+  <view class="root-editdrug">
+    <view class="headline"> 编辑药物 </view>
+    <view class="panel">
+      <view class="panel-title">药物信息</view>
       <AtList>
         <AtInput
           style="margin-left: 12px"
-          name="value1"
           title="药物名称"
           type="text"
           placeholder="请输入药物名称"
           :value="state.drugName"
           :onChange="onDrugNameChange"
         />
-        <Picker mode="selector" :range="state.dose" :onChange="onDoseChange">
+        <picker
+          mode="selector"
+          :range="state.dose"
+          :value="state.doseChecked"
+          :onChange="onDoseChange"
+        >
           <AtListItem
             title="服用方式"
-            :extraText="state.doseChecked"
+            :extraText="state.dose[state.doseChecked]"
             hasBorder
           />
-        </Picker>
+        </picker>
         <AtInput
           title="服药剂量"
           type="number"
@@ -27,19 +31,24 @@
           :value="state.dosage"
           :onChange="onDosageChange"
         />
-        <Picker mode="selector" :range="state.form" :onChange="onFormChange">
+        <picker
+          mode="selector"
+          :range="state.form"
+          :value="state.formChecked"
+          :onChange="onFormChange"
+        >
           <AtListItem
             title="药物剂型"
-            :extraText="state.formChecked"
+            :extraText="state.form[state.formChecked]"
             hasBorder
           />
-        </Picker>
+        </picker>
       </AtList>
-    </View>
-    <View class="panel">
-      <View class="panel-title">服药信息</View>
+    </view>
+    <view class="panel">
+      <view class="panel-title">服药信息</view>
       <AtList hasBorder>
-        <Picker
+        <picker
           mode="time"
           :value="state.intervalSelected"
           :onChange="onIntervalChange"
@@ -49,8 +58,8 @@
             :extraText="state.intervalText"
             hasBorder
           />
-        </Picker>
-        <Picker
+        </picker>
+        <picker
           mode="date"
           :value="state.startDateSelected"
           :onChange="onStartDateChange"
@@ -60,8 +69,8 @@
             :extraText="state.startDateSelected"
             hasBorder
           />
-        </Picker>
-        <Picker
+        </picker>
+        <picker
           mode="time"
           :value="state.timeSelected"
           :onChange="onTimeChange"
@@ -71,8 +80,8 @@
             :extraText="state.timeSelected"
             hasBorder
           />
-        </Picker>
-        <Picker
+        </picker>
+        <picker
           mode="date"
           :value="state.stopDateSelected"
           :onChange="onStopDateChange"
@@ -82,13 +91,13 @@
             :extraText="state.stopDateSelected"
             hasBorder
           />
-        </Picker>
+        </picker>
       </AtList>
-    </View>
+    </view>
     <AtButton class="save-btn" type="primary" size="normal" :onClick="editDrug">
       完成
     </AtButton>
-  </View>
+  </view>
 </template>
 
 <script>
@@ -114,8 +123,8 @@ var state = reactive({
   drugName: "",
   dose: ["口服", "含服", "吸入", "外用", "滴眼", "滴耳", "静脉注射"], // 给药方式
   form: ["片", "胶囊", "糖浆", "散", "滴"], // 剂型
-  doseChecked: "口服",
-  formChecked: "片",
+  doseChecked: 0,
+  formChecked: 0,
   intervalText: "30分钟",
   intervalSelected: "00:30",
   timeSelected: getCurrTime(false),
@@ -141,23 +150,19 @@ if (index !== undefined) {
 }
 
 function onDoseChange(e) {
-  state.doseChecked = state.dose[e.detail.value];
-  // console.log(state.doseChecked);
+  state.doseChecked = e.detail.value;
 }
 
 function onFormChange(e) {
-  state.formChecked = state.form[e.detail.value];
-  // console.log(state.formChecked);
+  state.formChecked = e.detail.value;
 }
 
 function onTimeChange(e) {
   state.timeSelected = e.detail.value;
-  // console.log(state.timeSelected);
 }
 
 function onStartDateChange(e) {
   state.startDateSelected = e.detail.value;
-  // console.log(state.startDateSelected);
 }
 
 function onIntervalChange(e) {
@@ -201,8 +206,8 @@ function editDrug() {
     Date.now(), // 唯一标识
     state.drugName, // 药品名称
     state.dosage, // 给药剂量
-    state.formChecked, // 药物剂型
-    state.doseChecked, // 给药方式
+    state.form[state.formChecked], // 药物剂型
+    state.dose[state.doseChecked], // 给药方式
     state.intervalSelected, // 给药间隔
     state.timeSelected, // 初次给药
     state.startDateSelected, // 开始日期

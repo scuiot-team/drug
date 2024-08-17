@@ -1,8 +1,8 @@
 <template>
   <scroll-view class="root-managedrug" scroll-y>
-    <View class="headline"> 药物管理 </View>
-    <View class="panel">
-      <View class="panel-title">服药计划</View>
+    <view class="headline"> 药物管理 </view>
+    <view class="panel">
+      <view class="panel-title">服药计划</view>
       <!-- v-for drug in drugs: -->
       <AtList v-for="(drug, index) in state.drugs" :key="index">
         <AtSwipeAction
@@ -18,15 +18,15 @@
           />
         </AtSwipeAction>
       </AtList>
-    </View>
-    <View class="panel">
-      <View class="panel-title">库存药物</View>
-      <View v-if="state.drugStock.length === 0" class="empty">
+    </view>
+    <view class="panel">
+      <view class="panel-title">库存药物</view>
+      <view v-if="state.drugStock.length === 0" class="empty">
         <image class="empty-img" src="../../images/icons/啥也没有.svg" />
-        <View class="empty-text">药盒还没有库存哦～</View>
-      </View>
+        <view class="empty-text">药盒还没有库存哦～</view>
+      </view>
       <!-- 用AtCard循环 -->
-      <View v-else>
+      <view v-else>
         <AtCard
           v-for="(drugInfo, index) in state.drugStock"
           :key="index"
@@ -34,17 +34,15 @@
           :thumb="drugInfo.otc ? otcUrl : RxUrl"
           :extra="toDate(Number(drugInfo.time) * 1000) + '存入'"
         >
-          <View>
-            <Text class="bold-text">用法用量</Text>
-            ：{{ drugInfo.use }}
-          </View>
-          <View>
-            <Text class="bold-text">功能主治</Text>
-            ：{{ drugInfo.func }}
-          </View>
+          <view>
+            <view class="bold-text">用法用量</view> ：{{ drugInfo.use }}
+          </view>
+          <view>
+            <view class="bold-text">功能主治</view> ：{{ drugInfo.func }}
+          </view>
         </AtCard>
-      </View>
-    </View>
+      </view>
+    </view>
     <AtButton
       class="save-btn"
       type="primary"

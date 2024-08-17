@@ -1,11 +1,11 @@
 <template>
   <scroll-view class="root-patientinfo" scroll-y>
-    <View class="headline">{{ patientInfo.name }}</View>
+    <view class="headline">{{ patientInfo.name }}</view>
     <AtDivider content="最近一次测量数据" />
     <AtGrid class="grid" :data="data" />
     <AtDivider content="用药计划" />
-    <View class="panel">
-      <View class="panel-title">服用药物</View>
+    <view class="panel">
+      <view class="panel-title">服用药物</view>
       <AtList v-for="(drug, index) in state.drugs" :key="index">
         <AtSwipeAction
           autoClose
@@ -20,9 +20,9 @@
           />
         </AtSwipeAction>
       </AtList>
-      <!-- <View class="panel-title">服药周期</View>
-      <View class="panel-title">服药进度</View> -->
-    </View>
+      <!-- <view class="panel-title">服药周期</view>
+      <view class="panel-title">服药进度</view> -->
+    </view>
   </scroll-view>
 </template>
 

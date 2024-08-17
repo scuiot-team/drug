@@ -1,9 +1,9 @@
 <template>
-  <View class="root-bind">
-    <!-- <View class="success-text" v-if="!state.loading">
+  <view class="root-bind">
+    <!-- <view class="success-text" v-if="!state.loading">
       绑定成功：{{ state.result }}
-    </View> -->
-  </View>
+    </view> -->
+  </view>
 </template>
 
 <script>

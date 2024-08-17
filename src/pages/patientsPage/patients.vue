@@ -1,24 +1,24 @@
 <template>
-  <View class="root-patients">
+  <view class="root-patients">
     <scroll-view class="scrollview" scroll-y>
-      <View class="scrollbody">
-        <View class="card" v-for="(item, index) in patients" :key="index">
+      <view class="scrollbody">
+        <view class="card" v-for="(item, index) in patients" :key="index">
           <AtAvatar
             class="avatar"
             :image="item.avatar"
             @click="navigateTo('/pages/patientInfoPage/patientInfo?id=', index)"
           ></AtAvatar>
-          <View class="info">
+          <view class="info">
             <text class="name">{{ item.name }}</text>
-            <View class="icon-text">
+            <view class="icon-text">
               <image class="info-icon" :src="phoneIconUrl"></image>
               <text class="info-text">{{ item.phone }}</text>
-            </View>
-            <View class="icon-text">
+            </view>
+            <view class="icon-text">
               <image class="info-icon" :src="diseaseIconUrl"></image>
               <text class="info-text">{{ item.illness }}</text>
-            </View>
-            <View class="button-list">
+            </view>
+            <view class="button-list">
               <AtIcon
                 class="icon"
                 value="user"
@@ -44,10 +44,10 @@
                   )
                 "
               ></AtIcon>
-            </View>
-          </View>
-        </View>
-      </View>
+            </view>
+          </view>
+        </view>
+      </view>
     </scroll-view>
     <AtButton
       class="add"
@@ -55,7 +55,7 @@
     >
       添加监护患者
     </AtButton>
-  </View>
+  </view>
 </template>
 
 

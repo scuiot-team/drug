@@ -1,5 +1,5 @@
 <template>
-  <View class="root-login">
+  <view class="root-login">
     <AtInput
       class="input"
       placeholderClass="placeholder"
@@ -19,7 +19,7 @@
       :onChange="passwordInput.bind(this)"
     />
     <AtButton class="login" :onClick="login">保存</AtButton>
-  </View>
+  </view>
 </template>
 
 <script>

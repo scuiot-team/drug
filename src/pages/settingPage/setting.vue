@@ -1,5 +1,5 @@
 <template>
-  <View class="root-setting">
+  <view class="root-setting">
     <AtList class="menu" :hasBorder="false">
       <AtListItem
         class="item"
@@ -13,7 +13,7 @@
     <AtButton v-if="isLogin" class="logout" :onClick="logout"
       >退出登录</AtButton
     >
-  </View>
+  </view>
 </template>
 
 

@@ -1,13 +1,13 @@
 <template>
-  <View class="root-para">
-    <View class="headline">{{ paraTitle }}</View>
+  <view class="root-para">
+    <view class="headline">{{ paraTitle }}</view>
     <AtFab class="add-record-btn" :onClick="addRecord">
-      <Text className="at-fab__icon at-icon at-icon-add"></Text>
+      <view className="at-fab__icon at-icon at-icon-add"></view>
     </AtFab>
-    <View class="bar-chart">
+    <view class="bar-chart">
       <EChart ref="canvas" canvas-id="bar-canvas" />
-    </View>
-  </View>
+    </view>
+  </view>
 </template>
 
 <script>

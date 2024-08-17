@@ -1,25 +1,25 @@
 <template>
-  <View class="root-self">
-    <View class="user">
+  <view class="root-self">
+    <view class="user">
       <AtAvatar
         :image="userInfo.avatar"
         circle
         @click="navigateTo('/pages/selfInfoPage/selfInfo')"
       >
       </AtAvatar>
-      <Text
+      <view
         class="nickName"
         @click="navigateTo('/pages/selfInfoPage/selfInfo')"
       >
         {{ userInfo.nickName }}
-      </Text>
+      </view>
       <AtIcon
         class="setting"
         value="settings"
         color="gray"
         @click="navigateTo('/pages/settingPage/setting')"
       ></AtIcon>
-    </View>
+    </view>
     <AtList class="menu" :hasBorder="false">
       <AtListItem
         v-for="(item, index) in settingList"
@@ -40,7 +40,7 @@
       登录
     </AtButton>
     <AtTabBar fixed :tabList="tabList" :onClick="switchTab" :current="3" />
-  </View>
+  </view>
 </template>
 
 <script>

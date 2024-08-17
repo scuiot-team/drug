@@ -1,6 +1,6 @@
 <template>
-  <View class="root-home">
-    <View v-if="state.untokenDrugs.length !== 0">
+  <view class="root-home">
+    <view v-if="state.untokenDrugs.length !== 0">
       <AtNoticebar
         single
         showMore
@@ -10,33 +10,33 @@
       >
         {{ state.untokenDrugs.length }} 个药物还没有服用
       </AtNoticebar>
-    </View>
+    </view>
     <!-- 没有未服用药物后才可能显示 服用界面 -->
-    <View
+    <view
       v-if="state.timesUp && state.nextDrug !== undefined"
       class="time-up-cover"
     >
-      <View class="prompt">请服用下面药物</View>
-      <View class="drug-info-container">
-        <View class="drug-name">{{ state.nextDrug.drugName }}</View>
-        <View class="drug-dose">{{ state.nextDrug.dose }}</View>
-        <View class="drug-form">
+      <view class="prompt">请服用下面药物</view>
+      <view class="drug-info-container">
+        <view class="drug-name">{{ state.nextDrug.drugName }}</view>
+        <view class="drug-dose">{{ state.nextDrug.dose }}</view>
+        <view class="drug-form">
           {{ state.nextDrug.dosage }} {{ state.nextDrug.form }}
-        </View>
-      </View>
-      <View class="btn-container">
+        </view>
+      </view>
+      <view class="btn-container">
         <AtButton class="skip-btn" @click="done(true)" type="secondary">
           跳过本次用药
         </AtButton>
         <AtButton class="done-btn" @click="done(false)" type="secondary">
           已服药
         </AtButton>
-      </View>
-    </View>
-    <View v-if="drugs.length && state.nextDrug !== undefined">
+      </view>
+    </view>
+    <view v-if="drugs.length && state.nextDrug !== undefined">
       <!-- if drugs isn't empty -->
-      <View class="headline">距离下次服药时间</View>
-      <View class="countdown-container">
+      <view class="headline">距离下次服药时间</view>
+      <view class="countdown-container">
         <AtCountdown
           isCard
           isShowDay
@@ -47,8 +47,8 @@
           :seconds="state.clock.seconds"
           :onTimeUp="onTimeUp"
         />
-      </View>
-      <View class="alarm-container">
+      </view>
+      <view class="alarm-container">
         <AtTag class="tags drug-name" type="primary" circle>
           {{ state.nextDrug.drugName }}
         </AtTag>
@@ -58,28 +58,28 @@
         <AtTag class="tags dosage" type="primary" circle>
           {{ state.nextDrug.dosage }} {{ state.nextDrug.form }}
         </AtTag>
-      </View>
-    </View>
-    <View class="float-btn-container">
-      <View v-if="state.showSecondaryFabs">
+      </view>
+    </view>
+    <view class="float-btn-container">
+      <view v-if="state.showSecondaryFabs">
         <AtFab
           class="secondary-btn"
           @click="navigateTo('../manageDrugPage/manageDrug')"
-          ><Text className="at-fab__icon at-icon at-icon-list"></Text>
+          ><view className="at-fab__icon at-icon at-icon-list"></view>
         </AtFab>
         <AtFab
           class="secondary-btn"
           @click="navigateTo('../addDrugPage/addDrug')"
-          ><Text className="at-fab__icon at-icon at-icon-add"></Text>
+          ><view className="at-fab__icon at-icon at-icon-add"></view>
         </AtFab>
-      </View>
+      </view>
       <AtFab class="drug-btn" :onClick="toggleFloatBtn">
         <image class="svg-icon" src="../../images/icons/drug.svg"></image>
       </AtFab>
-    </View>
-    <View class="headline">健康指标</View>
-    <View class="health-info-cards">
-      <View class="card-container">
+    </view>
+    <view class="headline">健康指标</view>
+    <view class="health-info-cards">
+      <view class="card-container">
         <AtCard
           note="1天前"
           title="血压"
@@ -89,20 +89,20 @@
             navigateTo('../para2Page/para2?name=bloodPressureData&title=血压')
           "
         >
-          <View v-if="healthIndicators.bloodPressureData.length === 0">
-            <View class="no-data-text">无数据</View>
-          </View>
-          <View v-else>
-            <View class="data-text">
+          <view v-if="healthIndicators.bloodPressureData.length === 0">
+            <view class="no-data-text">无数据</view>
+          </view>
+          <view v-else>
+            <view class="data-text">
               {{ healthIndicators.bloodPressureData.slice(-1)[0].low }}/{{
                 healthIndicators.bloodPressureData.slice(-1)[0].high
               }}
-            </View>
-            <View class="unit-text">毫米汞柱</View>
-          </View>
+            </view>
+            <view class="unit-text">毫米汞柱</view>
+          </view>
         </AtCard>
-      </View>
-      <View class="card-container">
+      </view>
+      <view class="card-container">
         <AtCard
           note="1天前"
           title="体重"
@@ -110,18 +110,18 @@
           :extra="healthIndicators.weightData.slice(-1)[0].date + ' ❯'"
           @click="navigateTo('../paraPage/para?name=weightData&title=体重')"
         >
-          <View v-if="healthIndicators.weightData.length === 0">
-            <View class="no-data-text">无数据</View>
-          </View>
-          <View v-else>
-            <View class="data-text">
+          <view v-if="healthIndicators.weightData.length === 0">
+            <view class="no-data-text">无数据</view>
+          </view>
+          <view v-else>
+            <view class="data-text">
               {{ healthIndicators.weightData.slice(-1)[0].value }}
-            </View>
-            <View class="unit-text">千克</View>
-          </View>
+            </view>
+            <view class="unit-text">千克</view>
+          </view>
         </AtCard>
-      </View>
-      <View class="card-container">
+      </view>
+      <view class="card-container">
         <AtCard
           note="1天前"
           title="心率"
@@ -129,18 +129,18 @@
           :extra="healthIndicators.heartRateData.slice(-1)[0].date + ' ❯'"
           @click="navigateTo('../paraPage/para?name=heartRateData&title=心率')"
         >
-          <View v-if="healthIndicators.heartRateData.length === 0">
-            <View class="no-data-text">无数据</View>
-          </View>
-          <View v-else>
-            <View class="data-text">
+          <view v-if="healthIndicators.heartRateData.length === 0">
+            <view class="no-data-text">无数据</view>
+          </view>
+          <view v-else>
+            <view class="data-text">
               {{ healthIndicators.heartRateData.slice(-1)[0].value }}
-            </View>
-            <View class="unit-text">次/分钟</View>
-          </View>
+            </view>
+            <view class="unit-text">次/分钟</view>
+          </view>
         </AtCard>
-      </View>
-      <View class="card-container">
+      </view>
+      <view class="card-container">
         <AtCard
           note="1天前"
           title="血氧饱和度"
@@ -150,18 +150,18 @@
             navigateTo('../paraPage/para?name=bloodOxygenData&title=血氧饱和度')
           "
         >
-          <View v-if="healthIndicators.bloodOxygenData.length === 0">
-            <View class="no-data-text">无数据</View>
-          </View>
-          <View v-else>
-            <View class="data-text">
+          <view v-if="healthIndicators.bloodOxygenData.length === 0">
+            <view class="no-data-text">无数据</view>
+          </view>
+          <view v-else>
+            <view class="data-text">
               {{ healthIndicators.bloodOxygenData.slice(-1)[0].value }}
-            </View>
-            <View class="unit-text">%</View>
-          </View>
+            </view>
+            <view class="unit-text">%</view>
+          </view>
         </AtCard>
-      </View>
-      <View class="card-container">
+      </view>
+      <view class="card-container">
         <AtCard
           note="1天前"
           title="血糖"
@@ -171,20 +171,20 @@
             navigateTo('../paraPage/para?name=bloodGlucoseData&title=血糖')
           "
         >
-          <View v-if="healthIndicators.bloodGlucoseData.length === 0">
-            <View class="no-data-text">无数据</View>
-          </View>
-          <View v-else>
-            <View class="data-text">
+          <view v-if="healthIndicators.bloodGlucoseData.length === 0">
+            <view class="no-data-text">无数据</view>
+          </view>
+          <view v-else>
+            <view class="data-text">
               {{ healthIndicators.bloodGlucoseData.slice(-1)[0].value }}
-            </View>
-            <View class="unit-text">毫摩尔/升</View>
-          </View>
+            </view>
+            <view class="unit-text">毫摩尔/升</view>
+          </view>
         </AtCard>
-      </View>
-    </View>
+      </view>
+    </view>
     <AtTabBar fixed :tabList="tabList" :onClick="switchTab" :current="0" />
-  </View>
+  </view>
 </template>
 
 <script>

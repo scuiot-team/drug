@@ -1,6 +1,6 @@
 <template>
-  <View class="root-sos">
-    <View class="headline">设置紧急联系人号码</View>
+  <view class="root-sos">
+    <view class="headline">设置紧急联系人号码</view>
     <AtInput
       class="input"
       title="电话"
@@ -10,7 +10,7 @@
       :onChange="phoneInput.bind(this)"
     />
     <AtButton type="primary" class="save" :onClick="save">保存</AtButton>
-  </View>
+  </view>
 </template>
 
 <script>

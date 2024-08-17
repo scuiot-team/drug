@@ -1,8 +1,8 @@
 <template>
-  <View class="root-editpatientinfo">
-    <View class="headline"> 编辑监护对象信息 </View>
-    <View class="panel">
-      <View class="panel-title"> 基本信息 </View>
+  <view class="root-editpatientinfo">
+    <view class="headline"> 编辑监护对象信息 </view>
+    <view class="panel">
+      <view class="panel-title"> 基本信息 </view>
       <AtList>
         <AtInput
           class="input"
@@ -22,7 +22,7 @@
           :onChange="ageInput"
           required
         />
-        <Picker
+        <picker
           class="picker"
           mode="selector"
           :range="genderSelector"
@@ -34,7 +34,7 @@
             title="患者性别"
             :extraText="patientInfo.gender"
           />
-        </Picker>
+        </picker>
         <AtInput
           class="input"
           title="联系电话"
@@ -45,9 +45,9 @@
           :onChange="phoneInput"
         />
       </AtList>
-    </View>
-    <View class="panel">
-      <View class="panel-title"> 其他信息 </View>
+    </view>
+    <view class="panel">
+      <view class="panel-title"> 其他信息 </view>
       <AtList>
         <AtInput
           class="input"
@@ -57,7 +57,7 @@
           :value="patientInfo.illness"
           :onChange="illnessInput"
         />
-        <Picker
+        <picker
           class="picker"
           mode="selector"
           :range="relationSelector"
@@ -69,8 +69,8 @@
             style="margin-left: 3px"
             :extraText="patientInfo.relation"
           />
-        </Picker>
-        <Picker
+        </picker>
+        <picker
           class="picker"
           mode="selector"
           :range="livingSelector"
@@ -82,12 +82,12 @@
             title="是否独居"
             :extraText="patientInfo.liveAlone"
           />
-        </Picker>
+        </picker>
       </AtList>
-    </View>
-    <View class="panel">
-      <View class="panel-title">饮食习惯</View>
-      <View class="textarea">
+    </view>
+    <view class="panel">
+      <view class="panel-title">饮食习惯</view>
+      <view class="textarea">
         <AtTextarea
           class="content"
           :value="patientInfo.eatingHabit"
@@ -95,9 +95,9 @@
           :maxLength="200"
           placeholder="患者的饮食喜好、禁忌等..."
         />
-      </View>
-      <View class="panel-title">身体状况</View>
-      <View class="textarea">
+      </view>
+      <view class="panel-title">身体状况</view>
+      <view class="textarea">
         <AtTextarea
           class="content"
           :value="patientInfo.bodyHealth"
@@ -105,10 +105,10 @@
           :maxLength="200"
           placeholder="患者身体状况，是否残疾、生活是否自理等..."
         />
-      </View>
-    </View>
+      </view>
+    </view>
     <AtButton v-if="id == -1" class="save" :onClick="save">添加</AtButton>
-  </View>
+  </view>
 </template>
 
 

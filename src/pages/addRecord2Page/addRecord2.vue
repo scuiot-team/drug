@@ -1,6 +1,6 @@
 <template>
-  <View class="root-addrecord2">
-    <View class="headline"> 添加{{ paraTitle }}记录 </View>
+  <view class="root-addrecord2">
+    <view class="headline"> 添加{{ paraTitle }}记录 </view>
     <AtForm>
       <AtInput
         title="时间"
@@ -34,7 +34,7 @@
     >
       保存
     </AtButton>
-  </View>
+  </view>
 </template>
 
 <script>

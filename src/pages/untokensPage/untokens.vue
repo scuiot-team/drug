@@ -1,22 +1,22 @@
 <template>
-  <View class="root-untokens">
-    <View
+  <view class="root-untokens">
+    <view
       v-if="state.showUntokenDrug"
       class="time-up-cover warning"
       @click="hideDrugInfo"
     >
-      <View class="prompt">
+      <view class="prompt">
         您还没有服用{{ state.untokenDrug.drugName }}，请尽快服用
-      </View>
-      <View class="drug-info-container">
-        <View class="drug-name">{{ state.untokenDrug.drugName }}</View>
-        <View class="drug-dose">{{ state.untokenDrug.dose }}</View>
-        <View class="drug-form">
+      </view>
+      <view class="drug-info-container">
+        <view class="drug-name">{{ state.untokenDrug.drugName }}</view>
+        <view class="drug-dose">{{ state.untokenDrug.dose }}</view>
+        <view class="drug-form">
           {{ state.untokenDrug.dosage }}
           {{ state.untokenDrug.form }}
-        </View>
-      </View>
-      <View class="btn-container">
+        </view>
+      </view>
+      <view class="btn-container">
         <AtButton class="skip-btn" @click="untokenDone(true)" type="primary">
           忽略提醒
         </AtButton>
@@ -26,15 +26,15 @@
         <AtButton class="cancel-btn" @click="hideDrugInfo" type="secondary">
           取消
         </AtButton>
-      </View>
-      <View class="drug-date">
+      </view>
+      <view class="drug-date">
         该药应于
         {{ state.untokenDrug.date }}
         {{ state.untokenDrug.time }}
         服用
-      </View>
-    </View>
-    <View class="headline">未服用的药物</View>
+      </view>
+    </view>
+    <view class="headline">未服用的药物</view>
     <AtList v-for="(drug, index) in state.untokenDrugs" :key="index">
       <AtListItem
         hasBorder
@@ -44,7 +44,7 @@
         :onClick="showDrugInfo.bind(this, drug)"
       />
     </AtList>
-  </View>
+  </view>
 </template>
 
 <script>

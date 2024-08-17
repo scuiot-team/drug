@@ -1,15 +1,15 @@
 <template>
-  <View class="root-statistics">
+  <view class="root-statistics">
     <AtCalendar :currentDate="state.currDate" :onDayClick="switchDay" />
     <!-- <AtDivider :content="state.currDate" /> -->
-    <View class="panel-title">服药进度 ({{ state.currDate }})</View>
+    <view class="panel-title">服药进度 ({{ state.currDate }})</view>
     <scroll-view scroll-y>
-      <View class="timeline-container">
+      <view class="timeline-container">
         <AtTimeline pending :items="state.timeline"> </AtTimeline>
-      </View>
+      </view>
     </scroll-view>
     <AtTabBar fixed :onClick="switchTab" :tabList="tabList" :current="1" />
-  </View>
+  </view>
 </template>
 
 <script>

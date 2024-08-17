@@ -1,7 +1,7 @@
 <template>
-  <View class="root-chat">
-    <View class="container">
-      <View class="fixed-top">
+  <view class="root-chat">
+    <view class="container">
+      <view class="fixed-top">
         <AtInput
           type="text"
           placeholder="您有什么问题?"
@@ -15,39 +15,39 @@
             :onClick="onSendMsg"
           ></AtIcon>
         </AtInput>
-      </View>
-      <View class="wechat-content">
-        <View v-for="(item, index) in state.messages" :key="index">
-          <View class="wechat-dialog" v-if="item.role === 'assistant'">
-            <View class="wechat-dialog-face">
+      </view>
+      <view class="wechat-content">
+        <view v-for="(item, index) in state.messages" :key="index">
+          <view class="wechat-dialog" v-if="item.role === 'assistant'">
+            <view class="wechat-dialog-face">
               <AtAvatar class="avatar" :image="AiAvatar"></AtAvatar>
-            </View>
-            <View class="wechat-dialog-text">
+            </view>
+            <view class="wechat-dialog-text">
               {{ item.content }}
-            </View>
-          </View>
-          <View
+            </view>
+          </view>
+          <view
             class="wechat-dialog wechat-dialog-right"
             v-else-if="item.role === 'user'"
           >
-            <View class="wechat-dialog-face">
+            <view class="wechat-dialog-face">
               <AtAvatar class="avatar" :image="userAvatarUrl"></AtAvatar>
-            </View>
-            <View class="wechat-dialog-text">
+            </view>
+            <view class="wechat-dialog-text">
               {{ item.content }}
-            </View>
-          </View>
-        </View>
-        <View v-if="state.isLoading">
-          <View class="wechat-dialog">
-            <View class="wechat-dialog-face">
+            </view>
+          </view>
+        </view>
+        <view v-if="state.isLoading">
+          <view class="wechat-dialog">
+            <view class="wechat-dialog-face">
               <AtAvatar class="avatar" :image="AiAvatar"></AtAvatar>
-            </View>
-            <View class="wechat-dialog-text">
-              <View v-if="state.isResponding">
+            </view>
+            <view class="wechat-dialog-text">
+              <view v-if="state.isResponding">
                 {{ state.respondingText }}
-              </View>
-              <View v-else>
+              </view>
+              <view v-else>
                 <!-- <AtLoadMore
                   :onClick="stopLoading"
                   status="loading"
@@ -55,15 +55,15 @@
                   noMoreText="。"
                 /> -->
                 <AtIcon class="loader" value="loading"></AtIcon>
-              </View>
-            </View>
-          </View>
-        </View>
-      </View>
-    </View>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
     <!-- 底栏 Tabbar -->
     <AtTabBar fixed :tabList="tabList" :onClick="switchTab" :current="2" />
-  </View>
+  </view>
 </template>
 
 <script>

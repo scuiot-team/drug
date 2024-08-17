@@ -1,5 +1,5 @@
 <template>
-  <View class="root-selfinfo">
+  <view class="root-selfinfo">
     <head title="个人信息" is_back="true"></head>
     <image
       src="https://zgsdwz.top/static/image/背景-橘.jpg"
@@ -42,7 +42,7 @@
       :value="userInfo.phone"
       :onChange="phoneInput.bind(this)"
     />
-  </View>
+  </view>
 </template>
 
 <script>
