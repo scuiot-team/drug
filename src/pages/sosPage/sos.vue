@@ -27,10 +27,11 @@ import { setGlobalData, getGlobalData } from "../../utils/global_data";
 import { ref } from "vue";
 
 let urgentPhone = ref(String(getGlobalData("userInfo").urgentPhone));
+
 function phoneInput(e) {
-  console.log(e);
   urgentPhone.value = e;
 }
+
 function save() {
   if (urgentPhone.value !== "") {
     console.log("save");

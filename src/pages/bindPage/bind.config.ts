@@ -1,3 +1,3 @@
 export default definePageConfig({
-  navigationBarTitleText: '绑定药箱'
+  navigationBarTitleText: '绑定药盒'
 })

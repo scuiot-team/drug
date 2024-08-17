@@ -1,8 +1,19 @@
 <template>
   <view class="root-bind">
-    <!-- <view class="success-text" v-if="!state.loading">
-      绑定成功：{{ state.result }}
-    </view> -->
+    <view v-if="!state.isWeApp">
+      <view class="headline">绑定药盒</view>
+      <AtInput
+        class="input"
+        title="编号"
+        type="text"
+        placeholder="请输入药盒表面的编号"
+        :value="state.box_id"
+        :onChange="boxIdInput.bind(this)"
+      />
+      <AtButton type="primary" class="bind" :onClick="bindBoxId">
+        绑定设备
+      </AtButton>
+    </view>
   </view>
 </template>
 
@@ -16,7 +27,7 @@ export default {
 import "./bind.sass";
 import Taro from "@tarojs/taro";
 import { setGlobalData, getGlobalData } from "../../utils/global_data";
-import { ref, reactive } from "vue";
+import { reactive } from "vue";
 import { subscribe, unsubscribe } from "../../utils/mqtt_req";
 
 function subscribeToDrugTopics(box_id) {
@@ -30,9 +41,33 @@ function unsubscribeDrugTopics(box_id) {
 }
 
 var state = reactive({
-  result: "",
-  loading: ref(false),
+  box_id: "",
+  loading: false,
+  isWeApp: Taro.getEnv() === Taro.ENV_TYPE.WEAPP,
 });
+
+function boxIdInput(e) {
+  state.box_id = e;
+}
+
+function bindBoxId() {
+  // 如果之前绑定过药盒，取消订阅
+  let old_box_id = getGlobalData("box_id");
+  if (old_box_id) {
+    unsubscribeDrugTopics(old_box_id);
+  }
+  // 订阅新药盒
+  setGlobalData("box_id", state.box_id);
+  subscribeToDrugTopics(state.box_id);
+  Taro.showToast({
+    title: "成功绑定到药盒",
+    icon: "success",
+    duration: 2000,
+  });
+  setTimeout(() => {
+    Taro.navigateBack();
+  }, 1000);
+}
 
 function onScanFunc() {
   if (state.loading) {
@@ -49,28 +84,12 @@ function onScanFunc() {
       success: (data) => {
         if (data) {
           // 获取二维码中的参数，调后台接口
-          console.log(data);
-          state.result = data.result;
+          console.log("QR Code:", data.result);
+          state.box_id = data.result;
           // 扫码成功以后跳到签到成功页面、释放加载按钮
           state.loading = false;
           Taro.hideLoading();
-          // 如果之前绑定过药箱，取消订阅
-          let old_box_id = getGlobalData("box_id");
-          if (old_box_id) {
-            unsubscribeDrugTopics(old_box_id);
-            setGlobalData("subscribed", false);
-          }
-          // 订阅新药箱
-          setGlobalData("box_id", data.result);
-          subscribeToDrugTopics(data.result);
-          Taro.showToast({
-            title: "成功绑定到药箱",
-            icon: "success",
-            duration: 2000,
-          });
-          setTimeout(() => {
-            Taro.navigateBack();
-          }, 1000);
+          bindBoxId();
         }
       },
       fail: (err) => {
@@ -83,6 +102,8 @@ function onScanFunc() {
   }
 }
 
-onScanFunc();
+if (state.isWeApp) {
+  onScanFunc();
+}
 </script>
 

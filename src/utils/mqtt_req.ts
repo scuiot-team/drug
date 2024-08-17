@@ -27,11 +27,17 @@ export function connect() {
   // 微信小程序中需要将 wss 协议写为 wxs，且由于微信小程序出于安全限制，不支持 ws 协议
   try {
     if (getGlobalData('mqttConnected')) {
-        console.log("MQTT已连接");
-        return;
+      console.log("MQTT已连接");
+      return;
     }
     console.log("连接中...");
-    client = mqtt.connect(`wxs://${host}:8084/mqtt`, mqttOptions);
+    if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
+      console.log("this is weapp");
+      client = mqtt.connect(`wxs://${host}:8084/mqtt`, mqttOptions);
+    } else {
+      console.log("this is not weapp");
+      client = mqtt.connect(`wss://${host}:8084/mqtt`, mqttOptions);
+    }
     client.on("connect", () => {
       console.log("成功链接到MQTT服务器");
       setGlobalData('mqttConnected', true);
