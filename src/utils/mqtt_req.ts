@@ -1,4 +1,5 @@
 import mqtt from "./mqtt.min.js";
+import mqtt_latest from "mqtt";
 import { ref } from "vue";
 import { DrugInfo } from "./drugData";
 import { getGlobalData, setGlobalData } from "./global_data";
@@ -10,13 +11,22 @@ let drugStock = ref(getGlobalData('drugStock'));
 let healthIndicators = ref(getGlobalData('healthIndicators'));
 let client: any = null; // 初始化MQTT client
 
+const mqttOptions_: mqtt_latest.IClientOptions = {
+  keepalive: 10,
+  protocolVersion: 4, // MQTT V3.1.1
+  connectTimeout: 4000,
+  clientId: 'wechat_' + genRandStr(6),
+  username: 'nanguagua',
+  password: 'EMQXngg123',
+  clean: true, // Clean session
+};
+
 const mqttOptions = {
   keepalive: 10,
   protocolVersion: 4, // MQTT V3.1.1
   connectTimeout: 4000,
   clientId: 'wechat_' + genRandStr(6),
   username: 'nanguagua',
-  // password: atob("RU1RWG5nZzEyMw=="), // 我靠，这个atob会导致真机预览和真机调试失败白屏！！！
   password: 'EMQXngg123',
   clean: true, // Clean session
 };
@@ -36,7 +46,7 @@ export function connect() {
       client = mqtt.connect(`wxs://${host}:8084/mqtt`, mqttOptions);
     } else {
       console.log("this is not weapp");
-      client = mqtt.connect(`wss://${host}:8084/mqtt`, mqttOptions);
+      client = mqtt_latest.connect(`wss://${host}:8084/mqtt`, mqttOptions_);
     }
     client.on("connect", () => {
       console.log("成功链接到MQTT服务器");
